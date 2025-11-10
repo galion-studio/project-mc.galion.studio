@@ -19,7 +19,7 @@ start /B docker-compose -f docker-compose.fast.yml up -d >nul 2>&1
 
 REM Launch client instantly (parallel execution)
 cd client-launcher
-start /B "" python instant-launcher.py
+start /B "" py quick-launcher.py
 
 REM Quick success message
 cd ..

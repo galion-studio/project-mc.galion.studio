@@ -20,27 +20,21 @@ from ui.sidebar import Sidebar
 from ui.topbar import TopBar
 from ui.dashboard import Dashboard
 from database.db_manager import get_db
+from ui.frameless_window import FramelessWindow
 
 
-class DevConsole(ctk.CTk):
+class DevConsole(FramelessWindow):
     """
     Main Development Console Application.
     Simple, modern, effective.
     """
     
     def __init__(self):
-        super().__init__()
-        
-        # Window configuration
-        self.title("Development Minecraft Console - Galion.Studio")
-        self.geometry("1400x900")
+        super().__init__(title="GALION Developer Console")
         
         # Set theme
         ctk.set_appearance_mode("dark")
         ctk.set_default_color_theme("blue")
-        
-        # Configure window background with gradient effect
-        self.configure(fg_color=THEME["bg_primary"])
         
         # Initialize database
         self.db = get_db()
@@ -54,11 +48,29 @@ class DevConsole(ctk.CTk):
         
         # Current view
         self.current_view = None
+        self.main_ui_created = False
         
-        # Create UI
-        self.create_ui()
+        # Show login screen first
+        self.show_login()
+    
+    def show_login(self):
+        """Show login screen"""
+        from ui.login_screen import LoginScreen
         
-        # Show dashboard by default
+        LoginScreen(self, on_success=self.on_login_success)
+    
+    def on_login_success(self):
+        """Handle successful login"""
+        # Clear login screen
+        for widget in self.winfo_children():
+            widget.destroy()
+        
+        # Create main UI
+        if not self.main_ui_created:
+            self.create_ui()
+            self.main_ui_created = True
+        
+        # Show dashboard
         self.show_dashboard()
     
     def create_ui(self):
@@ -132,9 +144,11 @@ class DevConsole(ctk.CTk):
     
     def show_dashboard(self):
         """Show dashboard view"""
-        self.current_view = Dashboard(
+        from ui.modern_dashboard import ModernDashboard
+        
+        self.current_view = ModernDashboard(
             self.content_area,
-            on_quick_action=self.handle_quick_action
+            on_action=self.handle_quick_action
         )
         self.current_view.pack(fill="both", expand=True)
     
@@ -160,7 +174,7 @@ class DevConsole(ctk.CTk):
     
     def show_server(self):
         """Show server control view"""
-        from server.server_controller import ServerController
+        from server.modern_server_controller import ServerController
         
         self.current_view = ServerController(
             self.content_area,
@@ -215,7 +229,7 @@ class DevConsole(ctk.CTk):
     
     def show_builder(self):
         """Show mod builder"""
-        from ide.builder import ModBuilder
+        from ide.modern_builder import ModBuilder
         
         self.current_view = ModBuilder(
             self.content_area,
@@ -238,38 +252,47 @@ class DevConsole(ctk.CTk):
         self.current_view.pack(fill="both", expand=True)
     
     def show_settings(self):
-        """Show settings"""
-        # Create a simple placeholder for now
-        self.current_view = ctk.CTkFrame(
+        """Show admin settings"""
+        from ui.settings import AdminSettings
+        
+        self.current_view = AdminSettings(
             self.content_area,
-            fg_color=THEME["bg_primary"]
+            db=self.db
         )
         self.current_view.pack(fill="both", expand=True)
+    
+    def launch_game_client(self):
+        """Launch GALION game client"""
+        try:
+            from integrations.launcher_integration import get_launcher_integration
+            
+            launcher = get_launcher_integration()
+            success, message = launcher.launch_client()
+            
+            if success:
+                print(f"[Launcher] {message}")
+            else:
+                print(f"[Launcher] Error: {message}")
         
-        label = ctk.CTkLabel(
-            self.current_view,
-            text="⚙️ Settings",
-            font=THEME["font_header"],
-            text_color=THEME["text_primary"]
-        )
-        label.pack(pady=50)
-        
-        info = ctk.CTkLabel(
-            self.current_view,
-            text="Settings panel - Coming soon",
-            font=THEME["font_body"],
-            text_color=THEME["text_secondary"]
-        )
-        info.pack(pady=10)
+        except Exception as e:
+            print(f"[Launcher] Failed: {e}")
     
     def handle_quick_action(self, action: str):
         """Handle quick action from dashboard"""
-        if action == "upload_mod":
-            self.navigate_to("mods")
-        elif action == "start_server":
-            self.navigate_to("server")
-        elif action == "view_logs":
-            self.navigate_to("logs")
+        action_map = {
+            "upload_mod": "mods",
+            "start_server": "server",
+            "view_logs": "logs",
+            "ai_chat": "ai_chat",
+            "build_mod": "builder",
+            "console": "client_console",
+            "profiler": "profiler",
+        }
+        
+        if action == "launch_client":
+            self.launch_game_client()
+        elif action in action_map:
+            self.navigate_to(action_map[action])
 
 
 def main():
