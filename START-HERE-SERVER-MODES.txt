@@ -1,0 +1,229 @@
+================================================================================
+                    🌐 GALION.STUDIO SERVER MODES
+                         QUICK START GUIDE
+================================================================================
+
+TWO MODES AVAILABLE:
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│                                                                            │
+│  🏠 LOCAL MODE                        🌐 OFFICIAL MODE                    │
+│  ═══════════════                      ══════════════════                   │
+│                                                                            │
+│  Self-Hosted | Offline               Online | Full AI                     │
+│  localhost:25565                     mc.galion.studio:25565               │
+│                                                                            │
+│  ✅ No Internet Required              ✅ AI Integration (Grok 4)          │
+│  ✅ Open Source                       ✅ Online Multiplayer               │
+│  ✅ Full Control                      ✅ Premium Features                 │
+│  ❌ No AI Features                    ⚠️  Requires Internet               │
+│                                                                            │
+│  💰 FREE                              💰 PREMIUM                           │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+
+================================================================================
+                            🚀 QUICK START
+================================================================================
+
+▶ START LOCAL SERVER (Offline):
+  
+  START-LOCAL-SERVER.cmd
+  
+  Perfect for:
+  - LAN parties
+  - Offline play
+  - Testing/Development
+  - Privacy-focused hosting
+
+▶ START OFFICIAL SERVER (Online with AI):
+  
+  START-OFFICIAL-SERVER.cmd
+  
+  Perfect for:
+  - AI-powered gameplay
+  - Online multiplayer
+  - Premium features
+  - Managed hosting
+
+================================================================================
+                          ⚙️ FIRST TIME SETUP
+================================================================================
+
+FOR OFFICIAL MODE (AI Features):
+
+1. Get API Key:
+   → Visit: https://openrouter.ai/keys
+   → Get $1 free credit (≈1000 questions)
+
+2. Setup:
+   → Run: SETUP-GROK-NOW.cmd
+   → Paste your API key
+   → Test connection
+
+3. Start:
+   → Run: START-OFFICIAL-SERVER.cmd
+
+FOR LOCAL MODE (No Setup Required):
+
+1. Start:
+   → Run: START-LOCAL-SERVER.cmd
+   → That's it! ✨
+
+================================================================================
+                          📚 DOCUMENTATION
+================================================================================
+
+→ Complete Guide:       SERVER-MODES-GUIDE.md
+→ Quick Reference:      SERVER-MODES-QUICKSTART.md
+→ Feature Comparison:   SERVER-MODES-COMPARISON.md
+→ Main README:          README.md
+
+================================================================================
+                          🎮 USING THE LAUNCHER
+================================================================================
+
+1. Open the GALION.studio Launcher
+2. Go to "Server Mode" or "Settings" tab
+3. Choose your preferred mode:
+   - LOCAL: Offline, no AI
+   - OFFICIAL: Online, full AI
+4. Click "Confirm Selection"
+5. Server will use your chosen mode
+
+================================================================================
+                          🔄 SWITCHING MODES
+================================================================================
+
+You can switch between modes anytime!
+
+Option 1: Use Launcher (Easiest)
+  → Open launcher → Server Mode tab → Choose mode → Confirm
+
+Option 2: Use Command Line
+  → Run: START-LOCAL-SERVER.cmd (for LOCAL)
+  → Run: START-OFFICIAL-SERVER.cmd (for OFFICIAL)
+
+Option 3: Use Python
+  py -c "from server_mode_config import *; m = ServerModeManager(); m.set_mode(ServerMode.LOCAL)"
+
+================================================================================
+                          ❓ WHICH MODE TO CHOOSE?
+================================================================================
+
+CHOOSE LOCAL IF:
+  → You don't have internet connection
+  → You want fully offline play
+  → Privacy is important
+  → LAN party or local testing
+  → You don't need AI features
+
+CHOOSE OFFICIAL IF:
+  → You want AI-powered gameplay
+  → You need online multiplayer
+  → You want managed hosting
+  → Content creation/streaming
+  → You have reliable internet
+
+================================================================================
+                          🐛 TROUBLESHOOTING
+================================================================================
+
+ISSUE: "No internet connection" error (OFFICIAL mode)
+FIX:   Check your internet connection or switch to LOCAL mode
+
+ISSUE: "API key not configured" (OFFICIAL mode)
+FIX:   Run SETUP-GROK-NOW.cmd to configure API keys
+
+ISSUE: Server won't start (LOCAL mode)
+FIX:   Check Docker is running: docker --version
+
+ISSUE: Can't connect to server
+FIX:   - LOCAL: Use localhost or 127.0.0.1
+       - OFFICIAL: Check internet connection
+
+MORE HELP: See SERVER-MODES-GUIDE.md troubleshooting section
+
+================================================================================
+                          📊 FEATURE COMPARISON
+================================================================================
+
+| Feature              | LOCAL Mode    | OFFICIAL Mode |
+|----------------------|---------------|---------------|
+| Internet Required    | ❌ No         | ✅ Yes        |
+| AI Features          | ❌ No         | ✅ Yes        |
+| Online Multiplayer   | ❌ LAN Only   | ✅ Yes        |
+| API Keys Needed      | ❌ No         | ✅ Yes        |
+| Setup Time           | 2 minutes     | 5 minutes     |
+| Cost                 | FREE          | ~$5-20/mo     |
+| Open Source          | ✅ Yes        | ⚠️  Partial   |
+
+================================================================================
+                          🎯 EXAMPLES
+================================================================================
+
+EXAMPLE 1: LAN Party (Use LOCAL)
+  1. Run: START-LOCAL-SERVER.cmd
+  2. Share your IP with friends
+  3. Everyone connects to your IP:25565
+  4. Play offline!
+
+EXAMPLE 2: Public Server with AI (Use OFFICIAL)
+  1. Run: SETUP-GROK-NOW.cmd
+  2. Run: START-OFFICIAL-SERVER.cmd
+  3. Share server address: mc.galion.studio:25565
+  4. Players can use AI chat features!
+
+EXAMPLE 3: Development/Testing (Use LOCAL)
+  1. Run: START-LOCAL-SERVER.cmd
+  2. Test your mods/plugins
+  3. No internet interruptions
+  4. Full control
+
+================================================================================
+                          💡 PRO TIPS
+================================================================================
+
+TIP 1: Test locally first
+       Start with LOCAL mode to test everything works, then switch to OFFICIAL
+
+TIP 2: Keep API costs low
+       Use LOCAL mode for testing to avoid API charges
+
+TIP 3: Use launcher for easy switching
+       The launcher makes it super easy to switch modes
+
+TIP 4: Check connection status
+       The launcher shows if AI/internet is available
+
+TIP 5: Read the full guide
+       SERVER-MODES-GUIDE.md has tons of useful information
+
+================================================================================
+                          📞 SUPPORT
+================================================================================
+
+→ Website:     https://galion.studio
+→ GitHub:      Report issues on GitHub
+→ Developer:   Maciej Grajczyk
+→ AI Built:    Cursor + Claude Sonnet 4.5
+
+================================================================================
+                          🎉 YOU'RE READY!
+================================================================================
+
+Choose your mode and start playing:
+
+  🏠 Offline Play:    START-LOCAL-SERVER.cmd
+  🌐 Online with AI:  START-OFFICIAL-SERVER.cmd
+
+Have fun! 🎮
+
+================================================================================
+
+Made with ❤️ by galion.studio
+Developer: Maciej Grajczyk
+November 2025
+
+================================================================================
+

@@ -9,7 +9,7 @@ from pathlib import Path
 
 # Configuration
 USERNAME = "TestPlayer"
-MC_VERSION = "1.20.1"
+MC_VERSION = "1.21.1"  # Updated to match server version
 MINECRAFT_DIR = str(Path.home() / "AppData" / "Roaming" / "GalionLauncher" / "minecraft")
 
 print("=" * 60)

@@ -1,6 +1,6 @@
 """
 Fix Minecraft installation by properly downloading all files
-This will install Minecraft 1.20.1 and all required libraries
+This will install Minecraft 1.21.1 and all required libraries
 """
 import minecraft_launcher_lib
 import subprocess

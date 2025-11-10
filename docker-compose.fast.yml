@@ -1,0 +1,115 @@
+# FAST START - Optimized Docker Compose
+# Removes health checks and startup delays for instant launch
+
+version: '3.9'
+
+services:
+  # ========================================
+  # MINECRAFT SERVER - FAST START
+  # ========================================
+  titan-hub:
+    image: itzg/minecraft-server:java21
+    container_name: titan-hub
+    ports:
+      - "25565:25565"
+    environment:
+      # Accept EULA immediately
+      EULA: "TRUE"
+      
+      # Server type and version
+      TYPE: "PAPER"
+      VERSION: "1.21.1"
+      
+      # Server configuration
+      SERVER_NAME: "Titan Hub"
+      MOTD: "§6⚡ INSTANT SERVER ⚡§r\n§7Fast Launch Mode"
+      
+      # Player settings
+      MAX_PLAYERS: "100"
+      ONLINE_MODE: "FALSE"
+      ENFORCE_SECURE_PROFILE: "FALSE"
+      
+      # Performance - optimized for fast start
+      MEMORY: "4G"
+      USE_AIKAR_FLAGS: "true"
+      VIEW_DISTANCE: "6"  # Reduced for faster start
+      SIMULATION_DISTANCE: "4"  # Reduced for faster start
+      
+      # World settings
+      DIFFICULTY: "hard"
+      MODE: "survival"
+      LEVEL: "world"
+      
+      # Features
+      PVP: "true"
+      ALLOW_NETHER: "true"
+      ALLOW_END: "true"
+      SPAWN_PROTECTION: "0"
+      ENABLE_COMMAND_BLOCK: "true"
+      
+      # Network
+      ENABLE_QUERY: "false"  # Disabled for faster start
+      ENABLE_RCON: "true"
+      RCON_PASSWORD: "titan123"
+      RCON_PORT: "25575"
+      
+      # Fast startup options
+      INIT_MEMORY: "2G"  # Start with less, grow as needed
+      ENABLE_AUTOPAUSE: "false"  # No pause checks = faster
+      
+    volumes:
+      - ./worlds/hub:/data
+      - ./server-mods:/mods:ro
+    
+    restart: unless-stopped
+    
+    networks:
+      - titan-network
+    
+    # No health checks = instant start
+    # Server starts immediately without waiting
+
+  # ========================================
+  # POSTGRESQL DATABASE - FAST
+  # ========================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: titan-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: titan
+      POSTGRES_USER: titan
+      POSTGRES_PASSWORD: titan_secure_2025
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --nosync"  # No sync = faster
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - titan-network
+    # Instant start - no health check
+    command: postgres -c fsync=off -c full_page_writes=off -c synchronous_commit=off
+
+  # ========================================
+  # REDIS CACHE - FAST
+  # ========================================
+  redis:
+    image: redis:7-alpine
+    container_name: titan-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --maxmemory 512mb --maxmemory-policy allkeys-lru --save ""
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    networks:
+      - titan-network
+
+networks:
+  titan-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  redis-data:
+

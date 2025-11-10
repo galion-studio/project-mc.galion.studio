@@ -1,0 +1,78 @@
+🚀 AI INTEGRATION - READY TO USE
+
+═══════════════════════════════════════════════════════════
+
+GROK 4 FAST IS INTEGRATED INTO YOUR DEV CONSOLE!
+
+═══════════════════════════════════════════════════════════
+
+QUICK START (2 MINUTES):
+
+1. Get FREE API Key
+   → Go to: https://openrouter.ai/keys
+   → Sign up (free $1 credit = ~1000 AI responses!)
+   → Copy your API key
+
+2. Start Console
+   → Run: DEV-CONSOLE.cmd
+   → Click: 🤖 AI Chat (in sidebar)
+
+3. Connect
+   → Paste your API key
+   → Click: Connect
+   → ✅ DONE!
+
+═══════════════════════════════════════════════════════════
+
+FEATURES:
+
+💬 ADMIN CHAT
+   - Chat directly with Grok 4 Fast
+   - Ultra-fast responses (<1 second)
+   - Send to Minecraft chat
+   - Three modes: General, Minecraft, Code
+
+🎮 MINECRAFT BRIDGE
+   - Auto-responds to players
+   - Players type: ai <question>
+   - Example: ai what is redstone?
+   - AI answers in Minecraft chat automatically!
+
+═══════════════════════════════════════════════════════════
+
+WHAT IT COSTS:
+
+FREE: $1 credit = ~1000 AI responses
+AFTER: $0.001 per response (Dirt cheap!)
+
+Grok 4 Fast = Fastest AI model available
+Response time = Sub-second (<1s)
+
+═══════════════════════════════════════════════════════════
+
+ENABLE RCON (For Minecraft Bridge):
+
+Edit server.properties:
+  enable-rcon=true
+  rcon.port=25575
+  rcon.password=your_password
+
+Edit dev-console/config.py:
+  RCON_PASSWORD = "your_password"
+
+Restart server.
+
+═══════════════════════════════════════════════════════════
+
+THAT'S IT!
+
+Open console. Click AI Chat. Enter API key. Start chatting.
+
+Want players to chat with AI? Click "Start Bridge" in right panel.
+
+═══════════════════════════════════════════════════════════
+
+DEPLOYED. WORKING. FAST. SIMPLE.
+
+GO USE IT! 🚀
+

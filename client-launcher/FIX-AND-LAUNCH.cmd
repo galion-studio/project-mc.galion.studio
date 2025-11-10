@@ -8,7 +8,7 @@ echo   FIXING MINECRAFT INSTALLATION
 echo ========================================
 echo.
 echo This will:
-echo 1. Download Minecraft 1.20.1 files
+echo 1. Download Minecraft 1.21.1 files
 echo 2. Install all required libraries
 echo 3. Launch Minecraft
 echo.
