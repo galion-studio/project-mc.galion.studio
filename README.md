@@ -1,129 +1,192 @@
-# 🎮 MC.GALION.STUDIO - Minecraft Server
+# 🎮 GALION - AI-Powered Gaming Platform
 
-**A fully operational Minecraft 1.21.1 server with AI features and instant setup**
-
----
-
-## 🌐 Server Info
-
-**Server Address:** `mc.galion.studio`  
-**Port:** `25565` (default)  
-**Version:** Minecraft 1.21.1  
-**Status:** ✅ **ONLINE & READY TO PLAY**
-
-### How to Connect
-
-1. Open Minecraft Java Edition
-2. Click "Multiplayer"
-3. Click "Add Server"
-4. Enter server address: `mc.galion.studio`
-5. Click "Done" and then "Join Server"
-
-**That's it! You're in!**
+**A completely custom, open-source game client and server with built-in AI features**
 
 ---
 
-## ✨ What Makes This Server Special
+## 🌟 What is GALION?
 
-### 🤖 AI Assistant In-Game
-- Ask questions while playing
-- Get instant help (under 1 second!)
-- Just type: `hey console, [your question]`
-- Example: `hey console, how do I make a farm?`
+**GALION is NOT a Minecraft server.**
 
-### ⚡ Super Fast Setup
-- Download everything in one package
-- Install with one click
-- Join the server in under 2 minutes
-- No complicated setup required
+GALION is a completely custom, open-source gaming platform built from scratch with AI at its core. While it shares voxel-based gameplay concepts, it's an entirely separate engine with:
 
-### 🎯 Features
-- **No Premium Required** - Play without buying Minecraft (cracked mode)
-- **AI Help** - Get answers instantly while playing
-- **Automatic Mods** - Everything syncs automatically
-- **Fast Downloads** - Multi-threaded, super quick
-- **100 Player Slots** - Room for everyone
+- **Custom Client & Server** - Built from the ground up
+- **Built-in AI** - Voice commands, smart assistance, AI companions
+- **100% Free & Open Source** - No paid features, fully transparent
+- **Community-Driven** - Help shape the future of AI gaming
 
 ---
 
-## 🚀 Quick Start for Players
+## 🚀 How to Connect
 
-### Option 1: Fast Download Package (Recommended)
+**Download the GALION Custom Client**
 
-**This is the easiest way!**
+⚠️ **Important:** You need the GALION client to play. Regular Minecraft won't work.
 
-1. **Download the complete package:**
-   - Go to: `http://mc.galion.studio:8080/api/packages/download/TitanMinecraft-1.21.1-Complete.zip`
-   - Wait for download (about 1-2 minutes)
+### Quick Start
+
+1. **Download Client:** [galion.studio/download](https://galion.studio/download)
+2. **Install:** Available for Windows, Mac, and Linux
+3. **Launch:** Open GALION Client
+4. **Connect:** Server address: `mc.galion.studio`
+5. **Play!** Start your AI-enhanced gaming experience
+
+**👉 [Full Connection Guide](HOW-TO-CONNECT.md)**
+
+---
+
+## ✨ What Makes GALION Special
+
+### 🤖 Built-in AI Features
+- **Voice-to-voice communication** - Talk naturally with AI
+- **Smart game assistance** - AI helps you play better
+- **AI companions** - NPCs with real intelligence
+- **Voice commands** - Control game with your voice
+- **Instant responses** - AI answers in under 1 second
+
+### 🎨 Custom Game Engine
+- **Modern rendering** - Built from scratch for performance
+- **Voxel-based gameplay** - Build and explore
+- **Custom physics** - Realistic and fun mechanics
+- **Optimized performance** - Runs smoothly on most hardware
+- **Cross-platform** - Windows, Mac, and Linux
+
+### 🌐 Open Source & Free
+- **100% Free** - No paid features or subscriptions
+- **Open Source** - Full code available on GitHub
+- **Community-driven** - Help shape the platform
+- **Transparent** - See exactly how everything works
+- **MIT License** - Use and modify freely
+
+### 🎯 Gameplay Features
+- **Multiplayer** - Play with friends (100 player slots)
+- **Building** - Create amazing structures
+- **Exploration** - Discover generated worlds
+- **AI NPCs** - Intelligent non-player characters
+- **Voice interaction** - Talk to the game
+
+---
+
+## 🚀 Quick Start Guide
+
+### For Players (Connect to Server)
+
+**⚠️ Important:** You need the GALION custom client to play!
+
+1. **Download GALION Client:**
+   - Visit: [galion.studio/download](https://galion.studio/download)
+   - Choose your platform (Windows/Mac/Linux)
+   - Download installer
 
 2. **Install:**
-   - Extract the ZIP file
-   - Run `INSTALL.cmd` (Windows) or `INSTALL.sh` (Mac/Linux)
-   - Wait for installation to finish
+   - Run the installer
+   - Follow installation wizard
+   - Accept license agreement
 
-3. **Play:**
-   - Open Minecraft
-   - Server is already added!
-   - Click "Join Server"
+3. **Launch & Connect:**
+   - Open GALION Client
+   - Click "Connect to Server"
+   - Enter: `mc.galion.studio`
+   - Click "Join" and start playing!
 
-**Total time: Less than 2 minutes!**
+**Total time: Less than 5 minutes!**
 
-### Option 2: Manual Setup
+**👉 [Detailed Connection Guide](HOW-TO-CONNECT.md)**
 
-If you already have Minecraft:
+### For Developers (Host Your Own)
 
-1. Install Minecraft Java Edition 1.21.1
-2. Install Forge 52.0.29
-3. Add server: `mc.galion.studio`
-4. Connect and play!
+Want to host your own GALION server?
+
+1. **Clone Repository:**
+   ```bash
+   git clone https://github.com/galion-studio/project-mc.galion.studio.git
+   cd project-mc.galion.studio
+   ```
+
+2. **Deploy Server:**
+   ```bash
+   docker-compose up -d
+   ```
+
+3. **Configure:**
+   - Edit `.env.grok` for AI features
+   - Set up your domain/IP
+   - Configure server settings
+
+**👉 [Full Deployment Guide](DEPLOY.md)**
 
 ---
 
 ## 🎮 Using AI Features In-Game
 
-Our server has a smart AI assistant that helps you while playing.
+GALION has AI built directly into the client and server.
 
-### How to Ask Questions
+### Voice Commands
 
-Type any of these in chat:
+**Just speak naturally:**
+- "Hey GALION, how do I build this?"
+- "What's the best way to farm?"
+- "Help me find resources"
+- "Teach me about redstone"
+
+**Push-to-talk by default** - You control when AI listens
+
+### Text Commands (Chat)
+
+Type in chat:
 - `hey console, [question]`
 - `@ai [question]`
-- `console [question]`
+- `galion [question]`
 
 ### Examples
 
+**Voice:**
 ```
-hey console, what is redstone?
-@ai how do I build a portal?
-console where can I find diamonds?
+🎤 "Hey GALION, show me how to build a farm"
+🤖 "I'll guide you! First, find a water source..."
 ```
 
-**The AI responds in less than 1 second!**
+**Text:**
+```
+💬 @ai what are the best building materials?
+🤖 "For durability, I recommend stone bricks or..."
+```
+
+**AI responds in under 1 second!**
 
 ---
 
-## 📋 Server Technical Details
+## 📋 Platform Technical Details
+
+### Platform Architecture
+- **Type:** Custom game engine (NOT Minecraft)
+- **Language:** Python, C++, JavaScript
+- **Server:** FastAPI + Docker
+- **Client:** Custom rendering engine
+- **AI:** Grok-4 Fast via OpenRouter
+- **Database:** PostgreSQL + Redis
+- **Monitoring:** Grafana + Prometheus
 
 ### Server Specs
-- **Version:** Minecraft 1.21.1
-- **Server Type:** Paper (optimized)
-- **Max Players:** 100
-- **View Distance:** 8 chunks
-- **Difficulty:** Hard
-- **PVP:** Enabled
-- **Online Mode:** Disabled (no premium needed)
+- **Address:** `mc.galion.studio`
+- **Port:** `25565` (default)
+- **Max Players:** 100 concurrent
+- **View Distance:** 8-12 chunks (configurable)
+- **AI Response Time:** <1 second
+- **Uptime:** 99.9% target
 
 ### Ports & Services
-- **Minecraft:** `mc.galion.studio:25565`
-- **Mod Downloads:** `mc.galion.studio:8080`
-- **Monitoring:** `mc.galion.studio:3000` (admin only)
+- **Game Server:** `mc.galion.studio:25565`
+- **API:** `mc.galion.studio:8080`
+- **Monitoring:** `mc.galion.studio:3000` (admin)
+- **WebSocket:** `mc.galion.studio:8081` (voice)
 
-### World Settings
-- Survival mode
-- The Nether: Enabled
-- The End: Enabled
-- Spawn protection: Disabled
-- Command blocks: Enabled
+### AI Integration
+- **Model:** Grok-4 Fast (xAI)
+- **Voice:** Real-time speech-to-speech
+- **Latency:** 300-800ms typical
+- **Caching:** Smart response caching
+- **Privacy:** Push-to-talk, configurable
 
 ---
 
@@ -210,38 +273,64 @@ Here's what's running behind the scenes:
 
 ---
 
-## 🔧 Requirements
+## 🔧 System Requirements
 
-### For Playing
-- **Minecraft Java Edition** (or cracked launcher)
-- **Java 21** or newer
-- **4GB RAM** minimum
-- **Internet connection**
+### For Playing (GALION Client)
 
-### For Hosting
-- **Docker Desktop** installed
-- **Python 3.8+** installed
-- **4GB RAM** minimum
-- **Windows, Mac, or Linux**
+**Minimum:**
+- **OS:** Windows 10, macOS 10.15, Ubuntu 20.04+
+- **CPU:** Intel Core i3 or equivalent
+- **RAM:** 4GB
+- **GPU:** Integrated graphics (Intel HD 4000+)
+- **Storage:** 2GB
+- **Internet:** Broadband connection
+
+**Recommended:**
+- **OS:** Windows 11, macOS 12+, Ubuntu 22.04+
+- **CPU:** Intel Core i5 / AMD Ryzen 5
+- **RAM:** 8GB
+- **GPU:** NVIDIA GTX 1050 / AMD RX 560
+- **Storage:** 5GB
+- **Internet:** Broadband connection
+- **Microphone:** For voice features
+
+### For Hosting (GALION Server)
+
+**Minimum:**
+- **Docker** + Docker Compose
+- **Python 3.8+**
+- **4GB RAM**
+- **2 CPU cores**
+- **10GB storage**
+- **Linux** (recommended) or Windows/Mac
+
+**Recommended:**
+- **8GB+ RAM**
+- **4+ CPU cores**
+- **50GB SSD storage**
+- **Ubuntu 22.04 LTS**
+- **Dedicated server or VPS**
 
 ---
 
 ## 📖 Documentation
 
-### Quick Guides
-- [QUICKSTART.md](QUICKSTART.md) - Get started fast
-- [FAST-LAUNCH-GUIDE.md](FAST-LAUNCH-GUIDE.md) - Fastest way to play
+### For Players
+- **[HOW-TO-CONNECT.md](HOW-TO-CONNECT.md)** - Connection guide (START HERE!)
+- [QUICKSTART.md](QUICKSTART.md) - Quick reference
 - [CLIENT-SETUP.md](CLIENT-SETUP.md) - Client installation help
+- [FAST-LAUNCH-GUIDE.md](FAST-LAUNCH-GUIDE.md) - Fastest way to start
 
-### Technical Docs
+### For Developers
 - [PROJECT-SUMMARY.md](PROJECT-SUMMARY.md) - Complete project overview
 - [VPS-DEPLOYMENT-GUIDE.md](VPS-DEPLOYMENT-GUIDE.md) - Host on a VPS
 - [DEPLOY.md](DEPLOY.md) - Deployment instructions
+- [TITAN-BUILD-COMPLETE-MUSK-STYLE.md](TITAN-BUILD-COMPLETE-MUSK-STYLE.md) - Technical specs
 
-### Features
+### Features & AI
 - [AI-FEATURES-COMPLETE.md](AI-FEATURES-COMPLETE.md) - AI system details
-- [SERVER-MODES-GUIDE.md](SERVER-MODES-GUIDE.md) - Different server modes
-- [TITAN-BUILD-COMPLETE-MUSK-STYLE.md](TITAN-BUILD-COMPLETE-MUSK-STYLE.md) - Complete tech specs
+- [SERVER-MODES-GUIDE.md](SERVER-MODES-GUIDE.md) - Server configurations
+- [dev-console/CLIENT-CONSOLE-ADDED.md](dev-console/CLIENT-CONSOLE-ADDED.md) - Console features
 
 ---
 
