@@ -1,0 +1,40 @@
+{
+  "grok_ai": {
+    "enabled": true,
+    "model": "x-ai/grok-4-fast",
+    "api_provider": "openrouter",
+    "features": {
+      "chat_assistant": true,
+      "voice_commands": false,
+      "smart_assistance": true,
+      "error_diagnosis": true,
+      "auto_repair": true
+    },
+    "settings": {
+      "timeout": 30,
+      "max_tokens": 200,
+      "temperature": 0.7,
+      "cache_responses": true,
+      "show_progress": true
+    },
+    "triggers": {
+      "chat_prefix": "hey console,",
+      "alternative_prefix": "@ai",
+      "voice_activation": "Hey GALION"
+    }
+  },
+  "launcher": {
+    "admin_account": "galion.studio",
+    "auto_connect": true,
+    "server_address": "mc.galion.studio",
+    "auto_install_dependencies": true,
+    "transparent_logging": true
+  },
+  "performance": {
+    "ram_allocation": "4G",
+    "render_distance": 12,
+    "fps_limit": 120,
+    "jvm_args": "-XX:+UnlockExperimentalVMOptions -XX:+UseG1GC"
+  }
+}
+

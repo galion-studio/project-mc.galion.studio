@@ -33,15 +33,15 @@ if exist "client-launcher\dist\GalionLauncher-Enhanced-Final.exe" (
 )
 echo.
 
-REM Start GUI dev console
+REM Start GUI dev console (hidden console window)
 echo [3/4] Starting GUI Developer Console...
-start "Dev Console - Grok 4 Fast" py dev-console\console_main.py
+start /MIN "" pythonw dev-console\console_main.py
 echo  [OK] GUI console starting...
 echo.
 
-REM Start terminal console
+REM Start terminal console (hidden - runs in background)
 echo [4/4] Starting Terminal Console...
-start "Terminal Console - Grok" py console-chat.py
+start /MIN "" pythonw console-chat.py
 echo  [OK] Terminal console starting...
 echo.
 

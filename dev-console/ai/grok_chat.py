@@ -383,7 +383,47 @@ Provide code examples when relevant."""
                 loop.close()
             
         except Exception as e:
-            self.after(0, lambda: self.add_system_message(f"❌ Error: {str(e)}"))
+            # Better error handling with specific messages
+            error_msg = str(e)
+            
+            # Check for common errors and provide helpful messages
+            if "401" in error_msg or "User not found" in error_msg:
+                # API key is invalid
+                self.after(0, lambda: self.add_system_message(
+                    "❌ API Key Error: Your OpenRouter API key is invalid!\n\n"
+                    "Fix:\n"
+                    "1. Get FREE key from: https://openrouter.ai/keys\n"
+                    "2. Update .env.grok file with your key\n"
+                    "3. Click Connect button again\n\n"
+                    "Or run: FIX-GROK-API-KEY.cmd for help"
+                ))
+            elif "timeout" in error_msg.lower():
+                # Timeout error
+                self.after(0, lambda: self.add_system_message(
+                    f"❌ Timeout Error: Request took too long\n\n"
+                    "Try:\n"
+                    "- Check your internet connection\n"
+                    "- Try again in a moment\n"
+                    "- OpenRouter might be slow right now"
+                ))
+            elif "Network error" in error_msg:
+                # Network error
+                self.after(0, lambda: self.add_system_message(
+                    f"❌ Network Error: Cannot reach OpenRouter API\n\n"
+                    "Try:\n"
+                    "- Check your internet connection\n"
+                    "- Check if firewall is blocking connection\n"
+                    "- Try again in a moment"
+                ))
+            else:
+                # Generic error
+                self.after(0, lambda: self.add_system_message(
+                    f"❌ Error: {error_msg}\n\n"
+                    "If this persists, check:\n"
+                    "- Your API key in .env.grok\n"
+                    "- Your internet connection\n"
+                    "- OpenRouter API status"
+                ))
         
         finally:
             # Re-enable send button

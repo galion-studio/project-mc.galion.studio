@@ -1,0 +1,44 @@
+{
+  "profiles": {
+    "galion-custom": {
+      "name": "GALION Custom Profile",
+      "type": "custom",
+      "created": "2025-11-10T18:00:00.000Z",
+      "lastUsed": "2025-11-10T18:00:00.000Z",
+      "lastVersionId": "1.21.1",
+      "gameDir": "",
+      "javaArgs": "-Xmx4G -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=32M",
+      "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
+      "resolution": {
+        "width": 1920,
+        "height": 1080,
+        "fullscreen": false
+      },
+      "galion": {
+        "server": "mc.galion.studio",
+        "aiEnabled": true,
+        "grokApiKey": "configured-in-env",
+        "adminAccount": "galion.studio",
+        "customFeatures": [
+          "grok-ai-chat",
+          "voice-commands",
+          "smart-assistance",
+          "auto-mod-sync"
+        ]
+      }
+    }
+  },
+  "clientToken": "",
+  "authenticationDatabase": {},
+  "selectedProfile": "galion-custom",
+  "settings": {
+    "enableSnapshots": false,
+    "enableHistorical": false,
+    "enableReleases": true,
+    "profileSorting": "lastUsed",
+    "showGameLog": true,
+    "showMenu": true,
+    "soundOn": true
+  }
+}
+
