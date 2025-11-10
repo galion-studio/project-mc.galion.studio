@@ -37,6 +37,7 @@ class Sidebar(ctk.CTkFrame):
         self.nav_buttons = {}
         
         self.create_nav_button("dashboard", "📊 Dashboard", True)
+        self.create_nav_button("client_console", "💬 Client Console")
         self.create_nav_button("mods", "📦 Mods")
         self.create_nav_button("server", "🖥️ Server")
         self.create_nav_button("logs", "📜 Logs")

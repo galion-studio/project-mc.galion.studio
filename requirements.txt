@@ -21,7 +21,14 @@ colorama>=0.4.6
 prompt_toolkit>=3.0.0
 
 # Minecraft RCON client
-mcrcon>=1.0.0
+mcrcon>=0.7.0
 
 # Async utilities
 asyncio>=3.4.3
+
+# ========================================
+# TRANSPARENT CONSOLE GUI (NEW)
+# ========================================
+
+# Modern GUI framework
+customtkinter>=5.2.0

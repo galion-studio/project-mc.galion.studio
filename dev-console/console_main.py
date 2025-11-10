@@ -103,6 +103,8 @@ class DevConsole(ctk.CTk):
         # Show new view
         if section == "dashboard":
             self.show_dashboard()
+        elif section == "client_console":
+            self.show_client_console()
         elif section == "mods":
             self.show_mods()
         elif section == "server":
@@ -134,6 +136,13 @@ class DevConsole(ctk.CTk):
             self.content_area,
             on_quick_action=self.handle_quick_action
         )
+        self.current_view.pack(fill="both", expand=True)
+    
+    def show_client_console(self):
+        """Show client console view"""
+        from client.client_console import ClientConsole
+        
+        self.current_view = ClientConsole(self.content_area)
         self.current_view.pack(fill="both", expand=True)
     
     def show_mods(self):

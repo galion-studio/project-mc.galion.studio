@@ -1,20 +1,25 @@
 @echo off
-REM TITAN SERVER - View Live Logs
-
-color 0B
-cls
+REM ================================================================
+REM  📊 VIEW LOGS - Show recent log files
+REM ================================================================
 
 echo.
-echo ========================================
-echo    📊 TITAN SERVER - LIVE LOGS
-echo ========================================
-echo.
-echo Press Ctrl+C to exit (server keeps running)
+echo ================================================================
+echo   📊 RECENT LOGS
+echo ================================================================
 echo.
 
-cd /d "%~dp0"
-
-docker-compose logs -f
+if exist "logs" (
+    cd logs
+    echo Latest log files:
+    echo.
+    dir /O-D /B *.log 2>nul
+    echo.
+    echo To view a specific log: type "more filename.log"
+    echo.
+    cd ..
+) else (
+    echo No logs directory found.
+)
 
 pause
-

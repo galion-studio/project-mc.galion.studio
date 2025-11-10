@@ -8,18 +8,42 @@ Built following Elon Musk principles: First principles thinking, rapid iteration
 
 ## 🚀 Quick Start
 
-### Windows
+### Option 1: Full Dev Console (Recommended)
 
+**Windows:**
 ```cmd
 cd dev-console
 DEV-CONSOLE.cmd
 ```
 
-### Linux/Mac
-
+**Linux/Mac:**
 ```bash
 cd dev-console
 python console_main.py
+```
+
+Then click **💬 Client Console** in the sidebar.
+
+### Option 2: Client Console Only
+
+For quick AI chat and RCON control:
+
+**Windows:**
+```cmd
+START-CLIENT-CONSOLE.cmd
+```
+
+**Linux/Mac:**
+```bash
+python console-chat.py
+```
+
+### Option 3: Dev Console with Client Console Pre-opened
+
+**Windows:**
+```cmd
+cd dev-console
+START-WITH-CLIENT-CONSOLE.cmd
 ```
 
 ---
@@ -27,6 +51,14 @@ python console_main.py
 ## ✨ Features
 
 ### Phase 1: MVP (Core Features)
+
+#### 💬 Client Console (NEW!)
+- **AI Chat** - Grok-4 Fast integration for instant answers
+- **RCON Control** - Direct Minecraft server commands
+- **Project Management** - Git, Docker, and build tools
+- **Command History** - Navigate with arrow keys
+- **Real-time Status** - Live connection indicators
+- **Smart Routing** - Automatic command type detection
 
 #### 📦 Mod Management
 - **Drag-and-drop mod upload** - Simple, intuitive file upload
