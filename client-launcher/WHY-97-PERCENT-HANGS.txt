@@ -1,0 +1,48 @@
+================================================================
+  WHY DOES THE DOWNLOAD HANG AT 97%?
+================================================================
+
+IT'S NOT STUCK! It's still downloading! Here's what's happening:
+
+DOWNLOAD PHASES:
+----------------
+1. 0-50%:   Downloading libraries (~87 files) - FAST
+2. 50-95%:  Downloading main game JAR - FAST  
+3. 95-100%: Downloading ASSETS - SLOW! ⚠️
+
+WHAT ARE ASSETS?
+----------------
+Assets = thousands of tiny files:
+- All sound effects (footsteps, blocks, music)
+- All textures (every block, item, entity)
+- All language files
+- Font files
+- Shader files
+
+Total: 5000-7000+ tiny files!
+
+WHY IS IT SLOW?
+----------------
+- Each file needs a separate HTTP request
+- Server limits how fast you can request
+- Your antivirus might scan each file
+- Network overhead for each tiny file
+
+TYPICAL TIMES:
+--------------
+0-97%:     2-3 minutes ✅ FAST
+97-100%:   3-5 minutes ⏱️ SLOW (but working!)
+
+Total:     5-8 minutes for first download
+
+HOW TO KNOW IT'S WORKING:
+--------------------------
+- Progress text says "Downloading thousands of small files"
+- File count keeps increasing
+- Hard drive light is active
+- Network activity in task manager
+
+IT WILL FINISH! Just be patient! ☕
+
+================================================================
+

@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
-Grok Console Chat System - Integration Tests
-Test all components and verify <1 second response times
+Grok 4 Fast Console Chat System - Integration Tests
+Test all components and verify ultra-fast response times
+
+Using OpenRouter API for access to Grok 4 Fast and 500+ other models
 
 Tests:
-1. Grok API connectivity and response time
+1. Grok API connectivity and response time (via OpenRouter)
 2. RCON command execution
 3. Project controller operations
 4. Console chat commands
@@ -14,8 +17,15 @@ Tests:
 import asyncio
 import time
 import os
+import sys
 from dotenv import load_dotenv
 from colorama import init, Fore, Style
+
+# Fix Windows console encoding for emoji support
+if sys.platform == 'win32':
+    import codecs
+    sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+    sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
 
 # Initialize colorama
 init(autoreset=True)
@@ -87,13 +97,13 @@ class SystemTester:
             self.print_fail(".env.grok file not found")
             return False
         
-        # Check API key
-        api_key = os.getenv("XAI_API_KEY", "")
-        if api_key and api_key != "your-xai-api-key-here":
-            self.print_pass("XAI_API_KEY is set")
+        # Check API key (now using OpenRouter)
+        api_key = os.getenv("OPENROUTER_API_KEY", "")
+        if api_key and api_key != "your-openrouter-api-key-here":
+            self.print_pass("OPENROUTER_API_KEY is set")
         else:
-            self.print_warning("XAI_API_KEY not configured")
-            print(f"  Get your API key from: https://console.x.ai/")
+            self.print_warning("OPENROUTER_API_KEY not configured")
+            print(f"  Get your API key from: https://openrouter.ai/keys")
             return False
         
         return True
@@ -104,11 +114,12 @@ class SystemTester:
         
         # Test 1: Client initialization
         self.results["total_tests"] += 1
-        self.print_test("Initialize Grok client")
+        self.print_test("Initialize Grok client (via OpenRouter)")
         try:
-            api_key = os.getenv("XAI_API_KEY", "")
-            self.grok_client = GrokClient(api_key=api_key)
-            self.print_pass("Grok client initialized")
+            api_key = os.getenv("OPENROUTER_API_KEY", "")
+            model = os.getenv("GROK_MODEL", "x-ai/grok-beta")  # Get model from config
+            self.grok_client = GrokClient(api_key=api_key, model=model)
+            self.print_pass(f"Grok client initialized (model: {model})")
         except Exception as e:
             self.print_fail(f"Client initialization failed: {e}")
             return False

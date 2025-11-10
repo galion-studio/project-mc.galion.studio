@@ -1,0 +1,75 @@
+================================================================
+  HOW TO CONNECT TO YOUR MINECRAFT SERVER (3 WAYS)
+================================================================
+
+YOUR SERVER IS RUNNING ON: localhost:25565
+
+================================================================
+
+OPTION 1: USE OFFICIAL MINECRAFT LAUNCHER (EASIEST)
+================================================================
+
+1. Open the official Minecraft Launcher
+2. Click "Play" to start Minecraft
+3. Once in game, click "Multiplayer"
+4. Click "Add Server"
+5. Server Name: My Server
+   Server Address: localhost:25565
+6. Click "Done"
+7. Double-click the server to join!
+
+================================================================
+
+OPTION 2: USE TLAUNCHER (FREE, NO ACCOUNT NEEDED)
+================================================================
+
+1. Download TLauncher from: https://tlauncher.org
+2. Install and open TLauncher
+3. Click "Enter the Game"
+4. Click "Multiplayer"
+5. Click "Add Server"
+6. Server Address: localhost:25565
+7. Click "Done" and join!
+
+TLauncher works without a Minecraft account!
+
+================================================================
+
+OPTION 3: FIX THE GALION LAUNCHER
+================================================================
+
+The launcher needs Python dependencies. Run this:
+
+cd client-launcher
+py launcher-enhanced.py
+
+If that doesn't work, use Option 1 or 2 above.
+
+================================================================
+
+AFTER YOU CONNECT:
+================================================================
+
+Once in the server, you can test Grok AI:
+
+1. Open a new command window
+2. Run: START-GROK-BRIDGE.cmd
+3. In Minecraft, type: /ask What is redstone?
+4. Get instant AI responses!
+
+================================================================
+
+QUICK TROUBLESHOOTING:
+================================================================
+
+Can't connect?
+- Make sure server is running: docker-compose ps
+- Check the address is: localhost:25565
+- Use Java Edition (not Bedrock)
+
+Server offline?
+- Run: docker-compose up -d
+- Wait 30 seconds for it to start
+
+================================================================
+

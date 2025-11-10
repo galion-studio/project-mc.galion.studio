@@ -1,12 +1,12 @@
 @echo off
-title GROK AI BRIDGE - In-Game Chat
+title GROK 4 FAST AI BRIDGE - In-Game Chat
 color 0B
 cls
 
 echo.
 echo =========================================================
-echo   ⚡ GROK AI BRIDGE - In-Game Chat
-echo   Connects Minecraft chat to Grok AI
+echo   ⚡ GROK 4 FAST AI BRIDGE - In-Game Chat
+echo   Connects Minecraft chat to Grok 4 Fast via OpenRouter
 echo =========================================================
 echo.
 
@@ -30,8 +30,9 @@ if not exist ".env.grok" (
     echo.
     echo ✓ Created .env.grok
     echo.
-    echo 📝 IMPORTANT: Edit .env.grok and set your XAI_API_KEY
-    echo    Get your API key from: https://console.x.ai/
+    echo 📝 IMPORTANT: Edit .env.grok and set your OPENROUTER_API_KEY
+    echo    Get your API key from: https://openrouter.ai/keys
+    echo    (OpenRouter gives $1 free credit = ~1000 questions!)
     echo.
     pause
     exit /b 1

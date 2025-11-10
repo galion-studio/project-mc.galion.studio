@@ -1,0 +1,37 @@
+# Titan Example Forge Mod - Metadata
+modLoader="javafml"
+loaderVersion="[52,)"
+license="MIT"
+
+[[mods]]
+modId="titanexample"
+version="${file.jarVersion}"
+displayName="Titan Example Mod"
+description='''
+Example Forge mod demonstrating the Titan Mod API.
+Shows how to create mods with simplified event handling and networking.
+'''
+authors="Galion Studio"
+credits="Built with Titan Mod API"
+
+[[dependencies.titanexample]]
+    modId="forge"
+    mandatory=true
+    versionRange="[52,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.titanexample]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.21,1.22)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.titanexample]]
+    modId="titanmodapi"
+    mandatory=true
+    versionRange="[1.0,)"
+    ordering="AFTER"
+    side="BOTH"
+

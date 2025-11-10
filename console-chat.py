@@ -241,14 +241,20 @@ class ConsoleChat:
         """Ask Grok AI a question"""
         if not self.grok:
             print(f"{Fore.RED}✗ Grok AI not configured{Style.RESET_ALL}")
+            print(f"{Fore.YELLOW}  Check that OPENROUTER_API_KEY is set in .env.grok{Style.RESET_ALL}")
             return
         
         try:
             print(f"{Fore.CYAN}🤔 Asking Grok...{Style.RESET_ALL}")
+            print(f"{Fore.BLUE}   Question: {question}{Style.RESET_ALL}")
             response = await self.grok.ask_minecraft(question)
             print(f"{Fore.MAGENTA}🤖 Grok: {response}{Style.RESET_ALL}")
         except Exception as e:
             print(f"{Fore.RED}✗ AI error: {e}{Style.RESET_ALL}")
+            print(f"{Fore.YELLOW}  Troubleshooting:{Style.RESET_ALL}")
+            print(f"{Fore.YELLOW}  1. Check internet connection{Style.RESET_ALL}")
+            print(f"{Fore.YELLOW}  2. Verify API key at https://openrouter.ai/keys{Style.RESET_ALL}")
+            print(f"{Fore.YELLOW}  3. Check OpenRouter credits at https://openrouter.ai/credits{Style.RESET_ALL}")
     
     async def _handle_project_command(self, command: str):
         """Handle project control commands"""

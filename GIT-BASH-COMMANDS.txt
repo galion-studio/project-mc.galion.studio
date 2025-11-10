@@ -1,0 +1,99 @@
+================================================================================
+GIT BASH QUICK COMMANDS
+================================================================================
+
+STEP 1: Create Repository on GitHub
+------------------------------------
+https://github.com/organizations/galion-studio/repositories/new
+Name: project-mc.galion.studio
+
+
+STEP 2: Open Git Bash and Run These Commands
+---------------------------------------------
+
+# Navigate to project (if not already there)
+cd "/c/Users/Gigabyte/Documents/project-mc-serv-mc.galion.studio"
+
+# Push to GitHub
+git push -u origin main
+
+# Create and push release tag
+git tag -a v1.0.0-alpha -m "Initial alpha release"
+git push origin v1.0.0-alpha
+
+
+================================================================================
+ONE-LINER (Copy & Paste All at Once)
+================================================================================
+
+cd "/c/Users/Gigabyte/Documents/project-mc-serv-mc.galion.studio" && git push -u origin main && git tag -a v1.0.0-alpha -m "Initial alpha release" && git push origin v1.0.0-alpha
+
+
+================================================================================
+USING THE SCRIPT
+================================================================================
+
+Option 1: Run the bash script
+chmod +x push.sh
+./push.sh
+
+Option 2: Source it
+bash push.sh
+
+
+================================================================================
+AUTHENTICATION
+================================================================================
+
+Username: [Your GitHub username]
+Password: [Personal Access Token from https://github.com/settings/tokens]
+
+Get token:
+- Go to: https://github.com/settings/tokens
+- "Generate new token (classic)"
+- Select "repo" scope
+- Copy token (ghp_...)
+
+
+================================================================================
+CHECK STATUS
+================================================================================
+
+# See what's committed
+git log --oneline
+
+# Check remote
+git remote -v
+
+# See all files
+git ls-files
+
+
+================================================================================
+IF SOMETHING GOES WRONG
+================================================================================
+
+# Check current status
+git status
+
+# See current branch
+git branch
+
+# Verify remote is correct
+git remote -v
+
+# Try push again
+git push -u origin main --verbose
+
+
+================================================================================
+QUICK REFERENCE
+================================================================================
+
+Repository: https://github.com/galion-studio/project-mc.galion.studio
+Branch: main
+Files: 265 files committed
+Ready to push: YES ✓
+
+================================================================================
+

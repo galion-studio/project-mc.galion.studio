@@ -1,0 +1,31 @@
+# Titan Mod API - Forge Mod Metadata
+modLoader="javafml"
+loaderVersion="[52,)"
+license="MIT"
+
+[[mods]]
+modId="titanmodapi"
+version="${file.jarVersion}"
+displayName="Titan Mod API"
+description='''
+Unified API for developing Forge mods for the Titan server platform.
+Provides simplified interfaces for mod development, networking, and event handling.
+'''
+logoFile="logo.png"
+authors="Galion Studio"
+credits="Built with MinecraftForge"
+
+[[dependencies.titanmodapi]]
+    modId="forge"
+    mandatory=true
+    versionRange="[52,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.titanmodapi]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.21,1.22)"
+    ordering="NONE"
+    side="BOTH"
+

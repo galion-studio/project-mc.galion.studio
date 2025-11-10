@@ -1,0 +1,115 @@
+================================================================================
+POWERSHELL QUICK COMMANDS
+================================================================================
+
+STEP 1: Create Repository on GitHub First!
+-------------------------------------------
+https://github.com/organizations/galion-studio/repositories/new
+Name: project-mc.galion.studio
+
+
+STEP 2: Open PowerShell and Run These Commands
+-----------------------------------------------
+
+# Navigate to project
+cd "C:\Users\Gigabyte\Documents\project-mc-serv-mc.galion.studio"
+
+# Push to GitHub
+git push -u origin main
+
+# Create and push release tag
+git tag -a v1.0.0-alpha -m "Initial alpha release"
+git push origin v1.0.0-alpha
+
+
+================================================================================
+ONE-LINER (Copy & Paste All at Once)
+================================================================================
+
+cd "C:\Users\Gigabyte\Documents\project-mc-serv-mc.galion.studio"; git push -u origin main; git tag -a v1.0.0-alpha -m "Initial alpha release"; git push origin v1.0.0-alpha
+
+
+================================================================================
+OR USE THE POWERSHELL SCRIPT
+================================================================================
+
+Right-click push.ps1 and select "Run with PowerShell"
+
+Or in PowerShell:
+.\push.ps1
+
+
+================================================================================
+IF YOU GET EXECUTION POLICY ERROR
+================================================================================
+
+Run this first (as Administrator):
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+Then run:
+.\push.ps1
+
+
+================================================================================
+AUTHENTICATION
+================================================================================
+
+Username: [Your GitHub username]
+Password: [Personal Access Token from https://github.com/settings/tokens]
+
+Get Personal Access Token:
+1. Go to: https://github.com/settings/tokens
+2. Click "Generate new token (classic)"
+3. Name it: "Project Titan"
+4. Select scope: "repo" 
+5. Click "Generate token"
+6. Copy the token (starts with ghp_...)
+7. Use this as your password
+
+
+================================================================================
+CHECK STATUS COMMANDS
+================================================================================
+
+# See git status
+git status
+
+# View commit history
+git log --oneline -5
+
+# Check remote
+git remote -v
+
+# See branch
+git branch
+
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Error: "Repository not found"
+→ Create repo on GitHub first (Step 1)
+
+Error: "Authentication failed"  
+→ Use Personal Access Token, not password
+
+Error: "Permission denied"
+→ Check you have write access to galion-studio organization
+
+Error: "Script cannot be loaded" (PowerShell)
+→ Run: Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+
+================================================================================
+QUICK REFERENCE
+================================================================================
+
+Repository: https://github.com/galion-studio/project-mc.galion.studio
+Local Path: C:\Users\Gigabyte\Documents\project-mc-serv-mc.galion.studio
+Branch: main
+Files Ready: 265 files, 42,125 lines
+Status: Ready to push ✓
+
+================================================================================
+

@@ -1,0 +1,97 @@
+═══════════════════════════════════════════════════════════
+  🚀 GET GROK 4 FAST WORKING NOW (2 MINUTES!)
+═══════════════════════════════════════════════════════════
+
+⚡ WHAT IS THIS?
+  - Ultra-fast AI responses (<1 second!)
+  - Grok 4 Fast via OpenRouter API
+  - Works in Minecraft chat AND console
+  - $1 FREE credit = ~1000 questions!
+
+
+📋 3-STEP SETUP:
+
+STEP 1: Get Your API Key (30 seconds)
+  ✓ Go to: https://openrouter.ai/keys
+  ✓ Sign up (free!)
+  ✓ Copy your API key (starts with: sk-or-v1-...)
+
+STEP 2: Run Setup Script (30 seconds)
+  ✓ Double-click: SETUP-GROK-NOW.cmd
+  ✓ Paste your API key when asked
+  ✓ Wait for test to complete
+
+STEP 3: Start Using It! (instant)
+  ✓ Double-click: START-GROK-BRIDGE.cmd
+  ✓ Or run: python test-grok-system.py
+
+
+✅ THAT'S IT!
+
+═══════════════════════════════════════════════════════════
+
+🎮 HOW TO USE IN MINECRAFT:
+  1. Start bridge: START-GROK-BRIDGE.cmd
+  2. In Minecraft: /ask What is redstone?
+  3. Get instant AI response!
+
+
+💻 HOW TO USE IN PYTHON CODE:
+  ```python
+  from grok_client import GrokClient
+  import asyncio
+
+  async def main():
+      client = GrokClient(api_key="sk-or-v1-...")
+      response = await client.ask("What is Minecraft?")
+      print(response)
+
+  asyncio.run(main())
+  ```
+
+
+🔧 TROUBLESHOOTING:
+
+Problem: "API key not set"
+  → Edit .env.grok and paste your key
+  → Make sure it starts with: sk-or-v1-
+
+Problem: "401 error"
+  → Your API key is wrong
+  → Get new one: https://openrouter.ai/keys
+
+Problem: "Timeout"
+  → Check internet connection
+  → Try again in a few seconds
+
+
+⚙️ CUSTOMIZE (OPTIONAL):
+
+Want to use a different AI model?
+  1. Open: .env.grok
+  2. Change: GROK_MODEL=x-ai/grok-beta
+  3. Try these:
+     - x-ai/grok-2-1212 (cheaper)
+     - anthropic/claude-haiku (fastest!)
+     - openai/gpt-4-turbo (GPT-4)
+     - google/gemini-pro (Gemini)
+
+
+💰 PRICING:
+
+Grok 4 Fast: ~$0.001 per question
+Free Credit: $1 = ~1000 questions
+See all models: https://openrouter.ai/models
+
+
+📚 MORE HELP:
+
+  Full Guide: GROK-QUICK-START.md
+  Test Script: python test-grok-system.py
+  Start Bridge: START-GROK-BRIDGE.cmd
+
+
+═══════════════════════════════════════════════════════════
+  QUESTIONS? Check: GROK-QUICK-START.md
+═══════════════════════════════════════════════════════════
+

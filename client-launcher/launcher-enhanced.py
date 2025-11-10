@@ -26,7 +26,7 @@ import time
 SERVER_ADDRESS = "mc.galion.studio"
 SERVER_NAME = "Galion Studio"
 LAUNCHER_VERSION = "2.1.0"
-DEFAULT_MC_VERSION = "1.20.1"
+DEFAULT_MC_VERSION = "1.21.1"  # Updated to match server version
 
 # Color scheme - Modern dark theme
 COLOR_PRIMARY = "#1a1a2e"      # Dark blue-black
@@ -468,8 +468,11 @@ class EnhancedLauncher:
                     percent = (value / self.total_bytes) * 100
                     self.progress_percent_var.set(f"{percent:.1f}%")
                     
-                    # Draw progress bar
-                    self._draw_progress_bar(percent)
+                    # Draw progress bar (force update)
+                    try:
+                        self._draw_progress_bar(percent)
+                    except Exception as e:
+                        print(f"Progress bar draw error: {e}")
                     
                     # Calculate speed and ETA
                     elapsed = time.time() - self.download_start_time
@@ -492,22 +495,37 @@ class EnhancedLauncher:
         """Draw custom progress bar"""
         self.progress_canvas.delete("all")
         
+        # Force canvas to update geometry first
+        self.progress_canvas.update_idletasks()
+        
         width = self.progress_canvas.winfo_width()
         height = self.progress_canvas.winfo_height()
         
-        if width <= 1:  # Not rendered yet
+        if width <= 1:  # Not rendered yet, use fixed width
             width = 580
+        if height <= 1:
+            height = 30
         
         # Calculate progress width
-        progress_width = (width * percent) / 100
+        progress_width = int((width * percent) / 100)
         
-        # Draw progress
+        # Draw background (empty part)
+        self.progress_canvas.create_rectangle(
+            0, 0, width, height,
+            fill=COLOR_ACCENT,
+            outline=""
+        )
+        
+        # Draw progress (filled part)
         if progress_width > 0:
             self.progress_canvas.create_rectangle(
                 0, 0, progress_width, height,
                 fill=COLOR_PROGRESS,
                 outline=""
             )
+        
+        # Force canvas to redraw
+        self.progress_canvas.update()
     
     def _download_complete(self, success):
         """Download complete callback"""
@@ -534,6 +552,41 @@ class EnhancedLauncher:
         thread.daemon = True
         thread.start()
     
+    def _find_java(self):
+        """Find Java installation"""
+        import shutil
+        
+        # Try to find java executable
+        java_executable = shutil.which("java")
+        if java_executable:
+            return java_executable
+        
+        # Try common Java locations on Windows
+        if sys.platform == "win32":
+            common_paths = [
+                r"C:\Program Files\Java\jre-1.8\bin\java.exe",
+                r"C:\Program Files\Java\jre8\bin\java.exe",
+                r"C:\Program Files (x86)\Java\jre-1.8\bin\java.exe",
+                r"C:\Program Files\Microsoft\jdk-17\bin\java.exe",
+                r"C:\Program Files\Microsoft\jdk-11\bin\java.exe",
+                r"C:\Program Files\Eclipse Adoptium\jre-17\bin\java.exe",
+                r"C:\Program Files\Eclipse Adoptium\jre-8\bin\java.exe",
+            ]
+            
+            # Also check JAVA_HOME
+            java_home = os.getenv("JAVA_HOME")
+            if java_home:
+                java_path = os.path.join(java_home, "bin", "java.exe")
+                if os.path.exists(java_path):
+                    return java_path
+            
+            # Check common paths
+            for path in common_paths:
+                if os.path.exists(path):
+                    return path
+        
+        return None
+    
     def _launch_thread(self, username):
         """Background thread for launching"""
         try:
@@ -552,6 +605,21 @@ class EnhancedLauncher:
             
             time.sleep(0.5)  # Brief pause for visual feedback
             
+            # Step 1.5: Check Java
+            self.root.after(0, lambda: self.status_var.set("☕ Checking Java installation..."))
+            java_path = self._find_java()
+            
+            if not java_path:
+                raise Exception(
+                    "Java not found!\n\n"
+                    "Minecraft requires Java to run.\n\n"
+                    "Please install Java:\n"
+                    "1. Download from: https://www.java.com/download/\n"
+                    "2. Or install Java 17: https://adoptium.net/\n"
+                    "3. Restart this launcher\n\n"
+                    "After installing Java, try again."
+                )
+            
             # Step 2: Prepare launch
             self.root.after(0, lambda: self.status_var.set("⚙️ Preparing Minecraft..."))
             self.root.after(0, lambda: self.launch_button.set_text("⚙️ PREPARING..."))
@@ -564,39 +632,75 @@ class EnhancedLauncher:
             }
             
             # Step 3: Get launch command
-            self.root.after(0, lambda: self.status_var.set("🚀 Starting Minecraft..."))
+            self.root.after(0, lambda: self.status_var.set("🚀 Building launch command..."))
             self.root.after(0, lambda: self.launch_button.set_text("🚀 LAUNCHING..."))
             
-            command = minecraft_launcher_lib.command.get_minecraft_command(
-                DEFAULT_MC_VERSION,
-                self.minecraft_dir,
-                options
-            )
+            try:
+                command = minecraft_launcher_lib.command.get_minecraft_command(
+                    DEFAULT_MC_VERSION,
+                    self.minecraft_dir,
+                    options
+                )
+            except Exception as e:
+                raise Exception(f"Failed to build launch command:\n{str(e)}\n\nTry re-downloading Minecraft.")
+            
+            # Log the command (for debugging)
+            print(f"Launch command: {' '.join(command)}")
             
             time.sleep(0.3)  # Brief pause
             
             # Step 4: Launch process
-            process = subprocess.Popen(
-                command,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE
-            )
+            self.root.after(0, lambda: self.status_var.set("🎮 Starting Minecraft process..."))
             
-            # Wait a moment to check if it started successfully
-            time.sleep(2)
+            try:
+                # Launch with proper working directory
+                # NOTE: Removed CREATE_NEW_CONSOLE so we can capture errors properly
+                process = subprocess.Popen(
+                    command,
+                    cwd=self.minecraft_dir,  # Set working directory
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE
+                )
+            except Exception as e:
+                raise Exception(f"Failed to start Minecraft process:\n{str(e)}\n\nMake sure Java is installed correctly.")
+            
+            # Wait to check if it started successfully
+            time.sleep(3)
             
             # Check if process is still running
             if process.poll() is not None:
                 # Process ended immediately - there was an error
-                stderr = process.stderr.read().decode('utf-8', errors='ignore')
-                raise Exception(f"Minecraft failed to start. Check if Java is installed.\n\nError: {stderr[:200]}")
+                stdout_data = process.stdout.read().decode('utf-8', errors='ignore')
+                stderr_data = process.stderr.read().decode('utf-8', errors='ignore')
+                
+                error_msg = "Minecraft failed to start.\n\n"
+                
+                if stderr_data:
+                    error_msg += f"Error:\n{stderr_data[:500]}\n\n"
+                
+                if "java" in stderr_data.lower() or "java" in stdout_data.lower():
+                    error_msg += "This looks like a Java error.\n"
+                    error_msg += "Try installing/updating Java:\n"
+                    error_msg += "https://www.java.com/download/\n\n"
+                
+                if "memory" in stderr_data.lower():
+                    error_msg += "Not enough memory.\n"
+                    error_msg += "Close other programs and try again.\n\n"
+                
+                error_msg += "If problem persists:\n"
+                error_msg += "1. Install Java from java.com\n"
+                error_msg += "2. Restart your computer\n"
+                error_msg += "3. Run launcher as Administrator"
+                
+                raise Exception(error_msg)
             
             # Success!
             self.root.after(0, self._launch_success)
             
         except Exception as e:
             # Show error on main thread
-            self.root.after(0, lambda: self._launch_error(str(e)))
+            error_msg = str(e)  # Capture error message before lambda
+            self.root.after(0, lambda: self._launch_error(error_msg))
     
     def _launch_success(self):
         """Called when launch succeeds"""

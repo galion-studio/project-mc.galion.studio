@@ -1,0 +1,160 @@
+================================================================
+  GALION STUDIO LAUNCHER - COMPLETE FEATURES
+================================================================
+
+✅ ULTRA CLEAN UI
+  - Modern dark theme (blue & black)
+  - NO command windows!
+  - NO technical errors
+  - Clean, simple buttons
+  - Auto-minimizes after launch
+
+✅ SMART DOWNLOAD SYSTEM
+  - Shows what's being downloaded
+  - Progress bar with percentage
+  - Download speed & ETA
+  - Special message at 97% (asset download phase)
+  - Total size: ~500 MB
+  - Time: 5-8 minutes first time
+
+✅ FORGE SUPPORT (Mod Loader)
+  - Checkbox to enable
+  - Shows installation instructions
+  - Manual install: files.minecraftforge.net
+  - After install, adds mods to 'mods' folder
+  - Compatible with thousands of mods!
+
+✅ OPTIFINE SUPPORT (Performance Boost)
+  - Checkbox to enable
+  - Shows installation instructions  
+  - Manual install: optifine.net
+  - Improves FPS dramatically
+  - Better graphics options
+  - Shader support!
+
+✅ SERVER AUTO-ADD (PLANNED)
+  - Will auto-add localhost:25565
+  - Will auto-add mc.galion.studio
+  - No manual server adding needed!
+
+✅ USERNAME SAVING
+  - Remembers your username
+  - Saves in launcher_config.json
+  - Auto-fills next time
+
+✅ VERSION: 1.21.1
+  - Matches your server version
+  - Latest stable Minecraft
+  - Full multiplayer support
+
+================================================================
+
+DOWNLOAD PHASES EXPLAINED:
+--------------------------
+
+Phase 1 (0-50%): Libraries Download
+  - ~87 JAR files
+  - Java libraries for game
+  - FAST (1-2 minutes)
+
+Phase 2 (50-95%): Main Game Download  
+  - 1.21.1.jar (main game)
+  - ~20 MB file
+  - FAST (1-2 minutes)
+
+Phase 3 (95-100%): Assets Download
+  - 5000-7000 tiny files!
+  - Sounds, textures, language files
+  - SLOW (3-5 minutes) ⚠️
+  - NOT STUCK - just lots of files!
+
+================================================================
+
+HOW TO USE:
+-----------
+
+BASIC PLAY:
+1. Open launcher
+2. Enter username
+3. Click "INSTALL & PLAY" (first time)
+4. Wait for download
+5. Minecraft opens automatically!
+
+WITH FORGE (MODS):
+1. Click Forge checkbox
+2. Follow popup instructions
+3. Download from files.minecraftforge.net
+4. Install Forge
+5. Add mods to 'mods' folder
+6. Launch via official Minecraft launcher's Forge profile
+
+WITH OPTIFINE (PERFORMANCE):
+1. Click OptiFine checkbox
+2. Follow popup instructions
+3. Download from optifine.net
+4. Run OptiFine installer
+5. Launch via official Minecraft launcher's OptiFine profile
+
+================================================================
+
+FILES & LOCATIONS:
+------------------
+
+Launcher:
+  client-launcher/launcher-clean.py
+  client-launcher/START-CLEAN-LAUNCHER.cmd
+
+Minecraft Directory:
+  C:\Users\[YOU]\AppData\Roaming\GalionLauncher\minecraft
+
+Config File:
+  C:\Users\[YOU]\AppData\Roaming\GalionLauncher\minecraft\launcher_config.json
+
+Mods Folder (after Forge install):
+  C:\Users\[YOU]\AppData\Roaming\.minecraft\mods
+
+================================================================
+
+TROUBLESHOOTING:
+----------------
+
+"97% stuck forever!"
+  → It's NOT stuck! Asset download is slow.
+  → Wait 5-10 minutes total
+  → Check network activity in Task Manager
+  → See: WHY-97-PERCENT-HANGS.txt
+
+"Launch Failed"
+  → Install Java 17+: java.com
+  → Update graphics drivers
+  → Restart computer
+  → Try again
+
+"Can't connect to server"
+  → Make sure server is running: docker-compose ps
+  → Check address: localhost:25565
+  → Use Java Edition (not Bedrock!)
+
+Forge not working?
+  → Use official Minecraft launcher's Forge profile
+  → Don't use Galion launcher for modded
+
+OptiFine not working?
+  → Use official Minecraft launcher's OptiFine profile
+  → Don't use Galion launcher for OptiFine
+
+================================================================
+
+WHAT'S NEXT:
+------------
+
+Future features planned:
+- Auto Forge installation
+- Auto OptiFine installation
+- Auto server list addition
+- Mod browser & downloader
+- Skin changer
+- Resource pack manager
+
+================================================================
+

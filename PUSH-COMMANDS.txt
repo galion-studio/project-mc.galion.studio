@@ -1,0 +1,84 @@
+================================================================================
+MANUAL PUSH COMMANDS - Copy and Paste These
+================================================================================
+
+STEP 1: Create Repository on GitHub
+------------------------------------
+Go to: https://github.com/organizations/galion-studio/repositories/new
+
+- Repository name: project-mc.galion.studio
+- Description: Next-Generation Minecraft Server Platform - Scalable to 20,000+ concurrent players
+- Visibility: Public
+- DON'T check any boxes (no README, no .gitignore, no license)
+- Click "Create repository"
+
+
+STEP 2: Push Your Code
+-----------------------
+Copy and paste these commands into Command Prompt or PowerShell:
+
+cd "C:\Users\Gigabyte\Documents\project-mc-serv-mc.galion.studio"
+git push -u origin main
+
+
+STEP 3: Create Release Tag (Optional)
+--------------------------------------
+git tag -a v1.0.0-alpha -m "Initial alpha release"
+git push origin v1.0.0-alpha
+
+
+================================================================================
+AUTHENTICATION
+================================================================================
+
+When Git asks for credentials:
+
+Username: [Your GitHub username]
+Password: [Use a Personal Access Token - NOT your password!]
+
+Get Personal Access Token:
+1. Go to: https://github.com/settings/tokens
+2. Click "Generate new token (classic)"
+3. Give it a name: "Project Titan Push"
+4. Select scope: "repo" (full control of private repositories)
+5. Click "Generate token"
+6. Copy the token (starts with ghp_...)
+7. Use this token as your password when pushing
+
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Error: "Repository not found"
+→ You need to create the repository on GitHub first (Step 1)
+
+Error: "Authentication failed"
+→ Use a Personal Access Token, not your password
+
+Error: "Permission denied"
+→ Make sure you have write access to galion-studio organization
+
+
+================================================================================
+VERIFY SUCCESS
+================================================================================
+
+After pushing, visit:
+https://github.com/galion-studio/project-mc.galion.studio
+
+You should see all your files there!
+
+
+================================================================================
+QUICK REFERENCE
+================================================================================
+
+Repository URL: https://github.com/galion-studio/project-mc.galion.studio
+Local Path: C:\Users\Gigabyte\Documents\project-mc-serv-mc.galion.studio
+Branch: main
+Files: 265 files, 42,125 lines of code
+License: CC BY-NC-SA 4.0
+
+================================================================================
+

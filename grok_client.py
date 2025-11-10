@@ -33,8 +33,8 @@ class GrokClient:
     def __init__(
         self,
         api_key: str,
-        model: str = "x-ai/grok-beta",
-        timeout: int = 2,
+        model: str = "x-ai/grok-4-fast",  # Grok 4 Fast - ultra-fast responses
+        timeout: int = 30,
         max_tokens: int = 100,
         temperature: float = 0.7,
         cache_size: int = 100
@@ -44,8 +44,8 @@ class GrokClient:
         
         Args:
             api_key: OpenRouter API key from openrouter.ai/keys
-            model: Model to use (x-ai/grok-beta for Grok-4 Fast)
-            timeout: Max timeout in seconds (default 2s)
+            model: Model to use (x-ai/grok-4-fast for Grok 4 Fast)
+            timeout: Max timeout in seconds (default 30s - increased for reliability)
             max_tokens: Max response length (default 100 for speed)
             temperature: Response creativity (0.7 for balanced)
             cache_size: Number of responses to cache
@@ -134,7 +134,7 @@ class GrokClient:
             cache_key = self._get_cache_key(prompt, system)
             if cache_key in self.cache:
                 self.stats["cache_hits"] += 1
-                print(f"⚡ Cache hit! ({time.time() - start_time:.3f}s)")
+                print(f"[CACHE] Cache hit! ({time.time() - start_time:.3f}s)")
                 return self.cache[cache_key]
         
         # Ensure session exists
@@ -173,25 +173,45 @@ class GrokClient:
         
         try:
             # Make API request
+            print(f"[API] Sending request to OpenRouter API...")
             async with self.session.post(
                 self.api_url,
                 json=payload,
                 headers=headers
             ) as response:
                 
-                # Handle errors
+                # Handle errors with detailed information
                 if response.status != 200:
                     error_text = await response.text()
-                    raise Exception(f"Grok API error {response.status}: {error_text}")
+                    print(f"[ERROR] API Error {response.status}: {error_text}")
+                    raise Exception(f"OpenRouter API error {response.status}: {error_text}")
                 
                 # Parse response
-                data = await response.json()
+                try:
+                    data = await response.json()
+                except Exception as json_err:
+                    response_text = await response.text()
+                    print(f"[ERROR] Failed to parse JSON response: {response_text[:200]}")
+                    raise Exception(f"Invalid JSON response from API: {str(json_err)}")
                 
-                # Extract response text
-                if "choices" in data and len(data["choices"]) > 0:
-                    answer = data["choices"][0]["message"]["content"]
-                else:
-                    raise Exception("No response from Grok API")
+                # Extract response text with detailed validation
+                if "choices" not in data:
+                    print(f"[ERROR] No 'choices' in response: {data}")
+                    raise Exception(f"Invalid API response structure: {data}")
+                
+                if len(data["choices"]) == 0:
+                    print(f"[ERROR] Empty choices array in response")
+                    raise Exception("API returned empty choices array")
+                
+                if "message" not in data["choices"][0]:
+                    print(f"[ERROR] No 'message' in choice: {data['choices'][0]}")
+                    raise Exception("Invalid choice structure in API response")
+                
+                if "content" not in data["choices"][0]["message"]:
+                    print(f"[ERROR] No 'content' in message: {data['choices'][0]['message']}")
+                    raise Exception("No content in API response message")
+                
+                answer = data["choices"][0]["message"]["content"]
                 
                 # Calculate response time
                 elapsed = time.time() - start_time
@@ -210,13 +230,21 @@ class GrokClient:
                     cache_key = self._get_cache_key(prompt, system)
                     self._add_to_cache(cache_key, answer)
                 
-                print(f"⚡ Grok responded in {elapsed:.3f}s")
+                print(f"[OK] Grok responded in {elapsed:.3f}s")
                 
                 return answer
                 
         except asyncio.TimeoutError:
-            raise Exception(f"Grok API timeout (>{self.timeout}s)")
+            print(f"[ERROR] Request timed out after {self.timeout} seconds")
+            raise Exception(f"OpenRouter API timeout (>{self.timeout}s) - Try increasing timeout or check internet connection")
+        except aiohttp.ClientError as e:
+            print(f"[ERROR] Network error: {str(e)}")
+            raise Exception(f"Network error connecting to OpenRouter: {str(e)}")
         except Exception as e:
+            # Don't wrap already-wrapped exceptions
+            if "OpenRouter API" in str(e) or "API response" in str(e):
+                raise
+            print(f"[ERROR] Unexpected error: {str(e)}")
             raise Exception(f"Grok API error: {str(e)}")
     
     async def ask_minecraft(self, question: str, player_name: str = "Player") -> str:
@@ -277,7 +305,7 @@ Use Python, Java, or Bash as appropriate."""
     def clear_cache(self):
         """Clear response cache"""
         self.cache.clear()
-        print("✓ Cache cleared")
+        print("[OK] Cache cleared")
 
 
 # Example usage and testing
@@ -292,40 +320,44 @@ async def test_grok_client():
     api_key = os.getenv("OPENROUTER_API_KEY")
     
     if not api_key or api_key == "your-openrouter-api-key-here":
-        print("⚠️  ERROR: OPENROUTER_API_KEY not set in .env.grok")
+        print("[ERROR] OPENROUTER_API_KEY not set in .env.grok")
         print("Get your API key from: https://openrouter.ai/keys")
         return
     
-    # Create client
-    client = GrokClient(api_key=api_key)
+    # Get model from env (defaults to Grok 4 Fast)
+    model = os.getenv("GROK_MODEL", "x-ai/grok-4-fast")
+    
+    # Create client with model from config
+    client = GrokClient(api_key=api_key, model=model)
+    print(f"[INFO] Using model: {model}")
     
     print("=" * 60)
-    print("🚀 Testing Grok-4 Fast Client")
+    print("[TEST] Testing Grok-4 Fast Client")
     print("=" * 60)
     print()
     
     try:
         # Test 1: Simple question
-        print("📝 Test 1: Simple question")
+        print("[TEST] Test 1: Simple question")
         response = await client.ask_minecraft("What is redstone?", "TestPlayer")
         print(f"Response: {response}")
         print()
         
         # Test 2: Same question (should hit cache)
-        print("📝 Test 2: Cache test (same question)")
+        print("[TEST] Test 2: Cache test (same question)")
         response = await client.ask_minecraft("What is redstone?", "TestPlayer")
         print(f"Response: {response}")
         print()
         
         # Test 3: Code question
-        print("📝 Test 3: Code question")
+        print("[TEST] Test 3: Code question")
         response = await client.ask_code("How to get player location in Bukkit?")
         print(f"Response: {response}")
         print()
         
         # Show statistics
         print("=" * 60)
-        print("📊 Statistics")
+        print("[STATS] Statistics")
         print("=" * 60)
         stats = client.get_stats()
         for key, value in stats.items():
