@@ -1,0 +1,84 @@
+# Release workflow
+# Triggered when a new tag is pushed (e.g., v1.0.0-alpha)
+
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    name: Build and Create Release
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: 'gradle'
+        
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+        
+    - name: Build release artifacts
+      run: ./gradlew clean build -x test --no-daemon
+      
+    - name: Extract version from tag
+      id: version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+      
+    - name: Generate changelog
+      id: changelog
+      uses: metcalfc/changelog-generator@v4.3.1
+      with:
+        myToken: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        name: Project Titan ${{ steps.version.outputs.VERSION }}
+        body: |
+          ## 🚀 Project Titan ${{ steps.version.outputs.VERSION }}
+          
+          ### 📋 Changelog
+          ${{ steps.changelog.outputs.changelog }}
+          
+          ### 📦 Installation
+          
+          See [README.md](https://github.com/galion-studio/project-mc-serv-mc.galion.studio#-getting-started) for installation instructions.
+          
+          ### ⚠️ Alpha Release Notice
+          This is an **ALPHA** release. Use with caution:
+          - Not recommended for production
+          - Breaking changes may occur
+          - Limited testing performed
+          
+          ### 📝 License
+          CC BY-NC-SA 4.0 - Free for non-commercial use
+        files: |
+          **/build/libs/*.jar
+          !**/*-javadoc.jar
+          !**/*-sources.jar
+        draft: false
+        prerelease: ${{ contains(steps.version.outputs.VERSION, 'alpha') || contains(steps.version.outputs.VERSION, 'beta') }}
+        generate_release_notes: true
+        
+    - name: Upload release summary
+      run: |
+        echo "## Release Created Successfully ✅" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Version:** ${{ steps.version.outputs.VERSION }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Tag:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+

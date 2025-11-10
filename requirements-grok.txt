@@ -1,0 +1,24 @@
+# Grok-4 Fast Console Chat System Dependencies
+# Ultra-fast AI chat with Minecraft server integration
+
+# FastAPI server for communication layer
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+
+# Async HTTP client for Grok API
+aiohttp>=3.9.0
+requests>=2.31.0
+
+# Environment configuration
+python-dotenv>=1.0.0
+
+# Console interface (colored output, rich UI)
+colorama>=0.4.6
+prompt_toolkit>=3.0.0
+
+# Minecraft RCON client
+mcrcon>=0.7.0
+
+# Additional utilities
+asyncio>=3.4.3
+

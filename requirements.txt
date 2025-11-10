@@ -1,0 +1,27 @@
+# Project Titan - Minecraft Server Requirements
+# Main dependencies for the mc.galion.studio project
+
+# Existing requirements (keep these)
+requests>=2.31.0
+python-dotenv>=1.0.0
+
+# ========================================
+# GROK CONSOLE CHAT SYSTEM (NEW)
+# ========================================
+
+# FastAPI server for communication layer
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+
+# Async HTTP client for Grok API
+aiohttp>=3.9.0
+
+# Console interface (colored output, rich UI)
+colorama>=0.4.6
+prompt_toolkit>=3.0.0
+
+# Minecraft RCON client
+mcrcon>=1.0.0
+
+# Async utilities
+asyncio>=3.4.3

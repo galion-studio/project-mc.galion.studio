@@ -1,0 +1,36 @@
+# Titan Plugin - Paper Plugin Configuration
+
+name: Titan
+version: ${version}
+main: studio.galion.titan.core.TitanPlugin
+api-version: 1.20
+description: Titan Server Core - Hybrid plugin/mod support with 20k player scaling
+author: Galion Studio
+website: https://github.com/yourusername/project-mc-serv-mc.galion.studio
+
+# Load at startup (before world loads)
+load: STARTUP
+
+# Soft dependencies (work with these plugins if present)
+softdepend:
+  - Vault
+  - PlaceholderAPI
+  - LuckPerms
+
+# Commands
+commands:
+  titan:
+    description: Main Titan command
+    usage: /titan <subcommand>
+    permission: titan.admin
+    aliases: [tt]
+
+# Permissions
+permissions:
+  titan.admin:
+    description: Access to all Titan commands
+    default: op
+  titan.use:
+    description: Basic Titan usage
+    default: true
+

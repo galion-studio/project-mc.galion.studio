@@ -1,0 +1,80 @@
+# Prometheus Configuration for Titan Server
+# Collects metrics from all Titan components
+
+global:
+  scrape_interval: 15s      # Scrape targets every 15 seconds
+  evaluation_interval: 15s  # Evaluate rules every 15 seconds
+  scrape_timeout: 10s       # Timeout after 10 seconds
+
+  # Attach these labels to any time series or alerts
+  external_labels:
+    cluster: 'titan-dev'
+    environment: 'development'
+
+# Alertmanager configuration (optional)
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          # - 'alertmanager:9093'
+
+# Load rules once and periodically evaluate them
+rule_files:
+  - "alerts/*.yml"
+
+# Scrape configurations
+scrape_configs:
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Titan Proxy Servers
+  - job_name: 'titan-proxy'
+    static_configs:
+      - targets: ['titan-proxy:9100']
+        labels:
+          service: 'proxy'
+          type: 'network'
+
+  # Titan Game Servers
+  - job_name: 'titan-servers'
+    static_configs:
+      - targets: 
+          - 'titan-hub:9100'
+          - 'titan-survival:9100'
+        labels:
+          service: 'gameserver'
+          type: 'minecraft'
+
+  # Redis Exporter
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-exporter:9121']
+        labels:
+          service: 'redis'
+          type: 'database'
+
+  # PostgreSQL Exporter
+  - job_name: 'postgresql'
+    static_configs:
+      - targets: ['postgres-exporter:9187']
+        labels:
+          service: 'postgresql'
+          type: 'database'
+
+  # Node Exporter (System metrics)
+  - job_name: 'node'
+    static_configs:
+      - targets: ['node-exporter:9100']
+        labels:
+          service: 'system'
+          type: 'infrastructure'
+
+  # Docker container metrics
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
+        labels:
+          service: 'docker'
+          type: 'infrastructure'

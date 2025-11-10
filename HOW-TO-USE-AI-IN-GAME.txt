@@ -1,0 +1,143 @@
+╔═══════════════════════════════════════════════════════════════════╗
+║              HOW TO USE AI IN MINECRAFT (IN-GAME)                 ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+There are TWO different systems:
+
+┌───────────────────────────────────────────────────────────────────┐
+│ 1. CONSOLE CHAT (for server operators)                           │
+└───────────────────────────────────────────────────────────────────┘
+
+This is for YOU (the server operator) to control things from your computer.
+
+📂 Run: LAUNCH-CONSOLE.cmd
+
+Then type commands like:
+  @ai What is redstone?        ← Ask AI from console
+  /say Hello players!          ← Send to Minecraft
+  @project status              ← Check git status
+  /status                      ← System stats
+
+⚠️  These commands ONLY work in the console-chat.py application!
+    NOT in Minecraft chat!
+
+┌───────────────────────────────────────────────────────────────────┐
+│ 2. IN-GAME AI (for players in Minecraft)                         │
+└───────────────────────────────────────────────────────────────────┘
+
+This lets PLAYERS chat with AI directly in Minecraft!
+
+📂 Run: START-IN-GAME-AI.cmd
+
+Then players type in Minecraft chat:
+  console what is redstone?
+  @ai how do I craft a piston?
+  hey console help me
+
+The AI will respond in Minecraft chat! 🤖
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                    YOUR SCREENSHOT ISSUE                          ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+In your screenshot, you typed "STATUS" in Minecraft.
+
+❌ Problem: STATUS is not a Minecraft command
+✅ Solution: Use one of these:
+
+Option A: Ask AI in Minecraft
+──────────────────────────────
+1. Run: START-IN-GAME-AI.cmd
+2. In Minecraft type: console what is the server status?
+3. AI will respond in chat!
+
+Option B: Use Console Chat (outside game)
+──────────────────────────────────────────
+1. Run: LAUNCH-CONSOLE.cmd
+2. Type: /status
+3. See stats in console window
+
+Option C: Use standard Minecraft commands
+──────────────────────────────────────────
+In Minecraft, type:
+  /list         ← Show players
+  /help         ← Show Minecraft commands
+  /time query   ← Check time
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                         QUICK SETUP                               ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Step 1: Setup API Key (one time)
+────────────────────────────────
+Run: SETUP-CONSOLE.cmd
+Get API key from: https://openrouter.ai/keys
+
+Step 2: Choose What You Want
+─────────────────────────────
+
+For SERVER OPERATORS (you):
+  → LAUNCH-CONSOLE.cmd
+  → Control server from your computer
+  → Use: @ai, /say, @project, /status
+
+For PLAYERS (in Minecraft):
+  → START-IN-GAME-AI.cmd  
+  → Players chat with AI in game
+  → Use: console <question>, @ai <question>
+
+You can run BOTH at the same time!
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                    EXAMPLE: IN-GAME AI                            ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+1. You (server owner) run: START-IN-GAME-AI.cmd
+
+2. Console shows:
+   ⚡ INSTANT AI - RUNNING (Grok-4 Fast)
+   ⚡ Grok AI ready! Type to chat!
+   📊 Monitoring chat...
+
+3. Player types in Minecraft: console what is redstone?
+
+4. Chat shows:
+   <Player> console what is redstone?
+   [Console] 🤔
+   [Console] Redstone is Minecraft's electrical system...
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                         COMMANDS LIST                             ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+IN MINECRAFT (players):
+  console <question>     ← Ask AI
+  @ai <question>         ← Ask AI
+  hey console <question> ← Ask AI
+
+IN CONSOLE-CHAT.PY (operators):
+  @ai <question>         ← Ask AI
+  /say <message>         ← Send to Minecraft
+  /list                  ← Show players
+  @project status        ← Git status
+  /status                ← System stats
+  /help                  ← Show help
+
+IN MINECRAFT (standard):
+  /help                  ← Minecraft help
+  /list                  ← List players
+  /time set day          ← Set time
+  /gamemode creative     ← Change gamemode
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                      READY TO USE!                                ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+🎮 For in-game AI:
+   Run: START-IN-GAME-AI.cmd
+   
+💻 For console control:
+   Run: LAUNCH-CONSOLE.cmd
+
+Both can run at the same time! ⚡
+

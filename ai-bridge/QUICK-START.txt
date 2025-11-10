@@ -1,0 +1,65 @@
+═══════════════════════════════════════════════════════════
+    ⚡ NANO AI BRIDGE - QUICK START ⚡
+═══════════════════════════════════════════════════════════
+
+🎯 ULTRA-FAST AI CHAT FOR MINECRAFT
+   Response time: < 1 second
+   Model: Claude Sonnet 4.5
+   Size: Minimal (1 file, 150 lines)
+
+═══════════════════════════════════════════════════════════
+    📋 SETUP (2 MINUTES):
+═══════════════════════════════════════════════════════════
+
+1. GET API KEY:
+   → Visit: https://console.anthropic.com/settings/keys
+   → Click "Create Key"
+   → Copy the key (starts with sk-ant-api03-)
+
+2. EDIT FILE:
+   → Open: ai-bridge/nano-bridge.py
+   → Line 19: API_KEY = "YOUR_API_KEY_HERE"
+   → Change to: API_KEY = "sk-ant-api03-your-actual-key"
+   → Save
+
+3. START BRIDGE:
+   → Double-click: START-AI-BRIDGE.cmd
+   → Or run: python ai-bridge/nano-bridge.py
+
+═══════════════════════════════════════════════════════════
+    🎮 USAGE IN MINECRAFT:
+═══════════════════════════════════════════════════════════
+
+Type in chat:
+
+   console hi
+   console how do I create a plugin?
+   @ai show me code
+   hey console, help me
+
+[Console] responds in < 1 second!
+
+═══════════════════════════════════════════════════════════
+    ⚡ FEATURES:
+═══════════════════════════════════════════════════════════
+
+✓ Real-time chat monitoring
+✓ Instant AI responses (< 1s)
+✓ Short, focused answers
+✓ Sonnet 4.5 quality
+✓ Multi-player support
+✓ Auto-chunking for long responses
+✓ Error handling
+
+═══════════════════════════════════════════════════════════
+    💰 COST:
+═══════════════════════════════════════════════════════════
+
+Each question: ~$0.001 (less than 1 cent)
+100 questions: ~$0.10
+Free tier: $5 = 5,000 questions!
+
+═══════════════════════════════════════════════════════════
+
+🚀 GET YOUR API KEY AND START CHATTING! ⚡
+

@@ -1,0 +1,216 @@
+# CI/CD Pipeline for Project Titan
+# Runs on pull requests and pushes to main branch
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  # Build and test Java components
+  build-java:
+    name: Build Java Components
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        java-version: [17, 21]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK ${{ matrix.java-version }}
+      uses: actions/setup-java@v4
+      with:
+        java-version: ${{ matrix.java-version }}
+        distribution: 'temurin'
+        cache: 'gradle'
+    
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+      
+    - name: Build with Gradle
+      run: ./gradlew build --no-daemon
+      
+    - name: Run tests
+      run: ./gradlew test --no-daemon
+      
+    - name: Generate test report
+      if: always()
+      uses: dorny/test-reporter@v1
+      with:
+        name: Test Results (Java ${{ matrix.java-version }})
+        path: '**/build/test-results/test/*.xml'
+        reporter: java-junit
+        fail-on-error: true
+        
+    - name: Upload build artifacts
+      if: matrix.java-version == '21'
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifacts
+        path: |
+          **/build/libs/*.jar
+          !**/*-javadoc.jar
+          !**/*-sources.jar
+        retention-days: 7
+
+  # Test Python components (AI bridge, launcher, etc.)
+  test-python:
+    name: Test Python Components
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.11', '3.12']
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        
+    - name: Run Python tests
+      run: |
+        if [ -d tests ]; then python -m pytest tests/ --verbose; fi
+
+  # Lint and code quality checks
+  code-quality:
+    name: Code Quality Checks
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: 'gradle'
+        
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+        
+    - name: Run Checkstyle
+      run: ./gradlew checkstyleMain checkstyleTest --no-daemon || true
+      
+    - name: Check code formatting
+      run: ./gradlew spotlessCheck --no-daemon || true
+
+  # Security scanning
+  security-scan:
+    name: Security Scanning
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+        severity: 'CRITICAL,HIGH'
+        
+    - name: Upload Trivy results to GitHub Security
+      uses: github/codeql-action/upload-sarif@v3
+      if: always()
+      with:
+        sarif_file: 'trivy-results.sarif'
+
+  # Docker build test
+  docker-build:
+    name: Test Docker Build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Build server Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./docker/Dockerfile.server
+        push: false
+        tags: galion-titan-server:test
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        
+    - name: Build proxy Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./docker/Dockerfile.proxy
+        push: false
+        tags: galion-titan-proxy:test
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+  # Documentation build test
+  docs-build:
+    name: Documentation Build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Check documentation links
+      uses: gaurav-nelson/github-action-markdown-link-check@v1
+      with:
+        use-quiet-mode: 'yes'
+        config-file: '.github/markdown-link-check-config.json'
+        
+    - name: Lint Markdown files
+      uses: articulate/actions-markdownlint@v1
+      with:
+        config: '.markdownlint.json'
+        files: '*.md docs/*.md'
+        ignore: 'node_modules'
+
+  # Summary job that all checks must pass
+  all-checks:
+    name: All Checks Passed
+    runs-on: ubuntu-latest
+    needs: [build-java, test-python, code-quality, security-scan, docker-build]
+    if: always()
+    
+    steps:
+    - name: Check all jobs
+      run: |
+        if [[ "${{ needs.build-java.result }}" == "success" ]] && \
+           [[ "${{ needs.test-python.result }}" == "success" ]] && \
+           [[ "${{ needs.code-quality.result }}" == "success" ]] && \
+           [[ "${{ needs.security-scan.result }}" == "success" ]] && \
+           [[ "${{ needs.docker-build.result }}" == "success" ]]; then
+          echo "✅ All checks passed!"
+          exit 0
+        else
+          echo "❌ Some checks failed"
+          exit 1
+        fi
+

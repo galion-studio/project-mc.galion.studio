@@ -1,0 +1,58 @@
+# Galion Velocity Proxy Docker Image
+# Optimized for high player count
+
+# Use minimal Java runtime
+FROM eclipse-temurin:17-jre-alpine
+
+# Metadata
+LABEL maintainer="Galion Studio"
+LABEL description="Velocity Proxy for Galion 20k Player Network"
+LABEL version="1.0.0"
+
+# Install dependencies
+# curl for health checks, bash for scripts
+RUN apk add --no-cache curl bash
+
+# Create velocity user (non-root for security)
+RUN addgroup -g 1000 velocity && \
+    adduser -D -u 1000 -G velocity velocity
+
+# Create directories
+WORKDIR /velocity
+RUN mkdir -p plugins logs
+
+# Download Velocity
+ARG VELOCITY_VERSION=3.2.0-SNAPSHOT
+ARG VELOCITY_BUILD=358
+RUN curl -o velocity.jar \
+    "https://api.papermc.io/v2/projects/velocity/versions/${VELOCITY_VERSION}/builds/${VELOCITY_BUILD}/downloads/velocity-${VELOCITY_VERSION}-${VELOCITY_BUILD}.jar"
+
+# Copy configuration files
+COPY config/velocity.toml ./velocity.toml
+COPY plugins/*.jar ./plugins/
+
+# Set ownership
+RUN chown -R velocity:velocity /velocity
+
+# Switch to non-root user
+USER velocity
+
+# Expose port
+EXPOSE 25577
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:8080/health || exit 1
+
+# JVM optimization flags for proxy
+ENV JAVA_OPTS="-Xms2G -Xmx2G \
+    -XX:+UseG1GC \
+    -XX:G1HeapRegionSize=4M \
+    -XX:+UnlockExperimentalVMOptions \
+    -XX:+ParallelRefProcEnabled \
+    -XX:+AlwaysPreTouch \
+    -XX:MaxInlineLevel=15"
+
+# Start Velocity
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar velocity.jar"]
+

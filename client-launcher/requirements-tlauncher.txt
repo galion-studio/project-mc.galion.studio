@@ -1,0 +1,9 @@
+# TLauncher-Style Launcher Requirements
+# This launcher downloads Minecraft directly like TLauncher
+
+# Main dependency for Minecraft downloading and launching
+minecraft-launcher-lib==6.4
+
+# Optional: For faster downloads
+requests==2.31.0
+

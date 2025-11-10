@@ -1,0 +1,23 @@
+# Funding options for Project Titan
+# This file enables the "Sponsor" button on GitHub
+
+github: # Add GitHub Sponsors username(s) here when available
+  # - galion-studio
+
+custom:
+  - https://galion.studio
+  # Add donation/support links when available
+  # - https://buymeacoffee.com/galionstudio
+  # - https://ko-fi.com/galionstudio
+  # - https://www.patreon.com/galionstudio
+
+# Community Message
+# If you'd like to support Project Titan, consider:
+# - Starring the repository ⭐
+# - Contributing code or documentation
+# - Sharing the project with others
+# - Reporting bugs and suggesting features
+# - Helping other users in discussions
+
+# Commercial licensing available at: titan@galion.studio
+

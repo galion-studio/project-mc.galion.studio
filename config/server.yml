@@ -1,0 +1,64 @@
+# Titan Server Configuration
+# Main configuration file for Titan servers
+
+# ========================================
+# Server Settings
+# ========================================
+server:
+  name: "titan-server-1"
+  type: "survival"  # hub, survival, creative, minigame, custom
+  max-players: 500
+
+# ========================================
+# Network Settings
+# ========================================
+network:
+  bind-address: "0.0.0.0"
+  bind-port: 25565
+
+# ========================================
+# Database Configuration (PostgreSQL)
+# ========================================
+database:
+  host: "${DB_HOST:localhost}"
+  port: 5432
+  database: "titan"
+  username: "titan"
+  password: "${DB_PASSWORD:changeme}"
+  pool-size: 20  # Connection pool size
+
+# ========================================
+# Redis Configuration
+# ========================================
+redis:
+  host: "${REDIS_HOST:localhost}"
+  port: 6379
+  password: ""  # Leave empty if no password
+  database: 0   # Redis database number
+
+# ========================================
+# Performance Settings
+# ========================================
+performance:
+  view-distance: 8
+  simulation-distance: 6
+  async-chunks: true
+  max-tick-time: 60000
+
+# ========================================
+# Monitoring
+# ========================================
+monitoring:
+  metrics-enabled: true
+  metrics-port: 9100
+  heartbeat-interval: 30  # seconds
+
+# ========================================
+# Features
+# ========================================
+features:
+  cross-server-chat: true
+  shared-inventory: true
+  shared-economy: true
+  player-tracking: true
+

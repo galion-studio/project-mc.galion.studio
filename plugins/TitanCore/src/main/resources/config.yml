@@ -1,0 +1,51 @@
+# Titan Core Plugin Configuration
+
+# Server identification
+server-name: "Titan Server"
+server-type: "hub"  # hub, survival, creative, minigame
+max-players: 500
+
+# Database connection
+database:
+  enabled: false  # Enable when database is set up
+  host: "postgres"
+  port: 5432
+  database: "titan"
+  username: "titan"
+  password: "changeme"
+
+# Redis connection
+redis:
+  enabled: false  # Enable when Redis is set up
+  host: "redis"
+  port: 6379
+  password: ""
+
+# Performance monitoring
+performance:
+  monitor-enabled: true
+  monitor-interval: 60  # seconds
+  warn-on-low-tps: true
+  low-tps-threshold: 18.0
+
+# Player features
+players:
+  welcome-message: true
+  join-message-format: "§e⚡ §a{player} §7joined MC.GALION.STUDIO"
+  quit-message-format: "§e⚡ §c{player} §7left the server"
+  track-sessions: true
+  track-playtime: true
+
+# Cross-server features (future)
+cross-server:
+  enabled: false
+  chat-sync: false
+  player-sync: false
+
+# Messages
+messages:
+  prefix: "§6§l[TITAN]§r "
+  no-permission: "§cYou don't have permission for this!"
+  player-not-found: "§cPlayer not found!"
+  command-cooldown: "§cPlease wait before using this command again!"
+

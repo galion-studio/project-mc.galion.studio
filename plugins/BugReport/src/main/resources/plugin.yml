@@ -1,0 +1,33 @@
+# Bug Report Plugin
+
+name: BugReport
+version: 1.0.0
+main: studio.galion.titan.plugins.bugreport.BugReportPlugin
+api-version: '1.21'
+author: Titan Team
+description: Simple bug reporting system for Titan server
+website: https://mc.galion.studio
+
+commands:
+  bug:
+    description: Report a bug or issue
+    usage: /bug <description>
+    aliases: [bugreport, report]
+    permission: bug.report
+
+permissions:
+  bug.report:
+    description: Allows reporting bugs
+    default: true
+  
+  bug.notify:
+    description: Receive bug report notifications
+    default: op
+  
+  bug.admin:
+    description: Full bug management access
+    default: op
+    children:
+      bug.report: true
+      bug.notify: true
+

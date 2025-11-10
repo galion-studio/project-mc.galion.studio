@@ -1,0 +1,130 @@
+// Galion Hybrid Server Build Script
+// Builds custom server supporting both Forge mods and Paper plugins
+
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group = 'com.galion'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+    
+    // Paper repository
+    maven {
+        name = 'papermc'
+        url = 'https://repo.papermc.io/repository/maven-public/'
+    }
+    
+    // Minecraft Forge repository
+    maven {
+        name = 'minecraftforge'
+        url = 'https://maven.minecraftforge.net/'
+    }
+    
+    // Mohist repository (hybrid server base)
+    maven {
+        name = 'mohist'
+        url = 'https://maven.mohistmc.com/'
+    }
+}
+
+dependencies {
+    // Mohist as base (supports both Forge and Paper)
+    implementation 'com.mohistmc:mohist:1.20.4-358'
+    
+    // Additional optimization libraries
+    implementation 'it.unimi.dsi:fastutil:8.5.12'
+    
+    // Networking
+    implementation 'io.netty:netty-all:4.1.104.Final'
+    
+    // Logging
+    implementation 'org.apache.logging.log4j:log4j-core:2.22.0'
+    implementation 'org.apache.logging.log4j:log4j-api:2.22.0'
+}
+
+// Task to download Mohist server
+task downloadMohist {
+    doLast {
+        def mohistUrl = 'https://mohistmc.com/api/v2/projects/mohist/versions/1.20.4/builds/358/download'
+        def mohistJar = file("${buildDir}/libs/mohist-1.20.4-358.jar")
+        
+        mohistJar.parentFile.mkdirs()
+        
+        if (!mohistJar.exists()) {
+            println "Downloading Mohist server..."
+            new URL(mohistUrl).withInputStream { input ->
+                mohistJar.withOutputStream { output ->
+                    output << input
+                }
+            }
+            println "Downloaded: ${mohistJar.name}"
+        } else {
+            println "Mohist already downloaded"
+        }
+    }
+}
+
+// Task to apply custom patches
+task applyPatches(dependsOn: downloadMohist) {
+    doLast {
+        println "Applying custom patches..."
+        // Apply performance patches, custom modifications, etc.
+        // This is where you would apply your optimizations
+        
+        copy {
+            from 'patches'
+            into "${buildDir}/patches-applied"
+        }
+        
+        println "Patches applied"
+    }
+}
+
+// Build custom server
+task buildServer(dependsOn: applyPatches, type: Jar) {
+    archiveBaseName = 'galion-server'
+    archiveVersion = '1.20.4'
+    
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    
+    // Include Mohist
+    from(zipTree("${buildDir}/libs/mohist-1.20.4-358.jar"))
+    
+    // Main class
+    manifest {
+        attributes(
+            'Main-Class': 'com.mohistmc.MohistMC',
+            'Implementation-Title': 'Galion Server',
+            'Implementation-Version': archiveVersion,
+            'Built-By': 'Galion Studio'
+        )
+    }
+    
+    // Exclude duplicate files
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+// Default build task
+build.dependsOn buildServer
+
+// Clean task
+clean {
+    delete "${buildDir}"
+}
+
+// Wrapper task
+wrapper {
+    gradleVersion = '8.5'
+}
+

@@ -1,0 +1,114 @@
+# Galion Velocity Proxy Configuration
+# Optimized for high player count
+
+# Config version - DO NOT CHANGE
+config-version = "2.6"
+
+# Bind address
+bind = "0.0.0.0:25577"
+
+# Server MOTD
+motd = "&6Galion Studio &7- &b20k Player Network"
+
+# Show max players
+show-max-players = 20000
+
+# Online mode (verify with Mojang)
+online-mode = true
+
+# Force key authentication (security)
+force-key-authentication = true
+
+# Prevent client proxy connections
+prevent-client-proxy-connections = false
+
+# Player info forwarding (modern = secure)
+player-info-forwarding-mode = "modern"
+
+# Forwarding secret (MUST match backend servers)
+forwarding-secret = "${VELOCITY_SECRET}"
+
+# Announce Forge
+announce-forge = true
+
+# Force default server
+force-default-server = true
+
+# Servers configuration
+[servers]
+  # Lobby servers
+  lobby1 = "server-lobby:25565"
+  lobby2 = "server-lobby:25565"
+  
+  # Game servers
+  survival1 = "server-survival:25565"
+  survival2 = "server-survival:25565"
+  
+  # Try order (where to send players on connect)
+  try = [
+    "lobby1",
+    "lobby2"
+  ]
+
+# Forced hosts (domain-based routing)
+[forced-hosts]
+  "play.galion.studio" = [
+    "lobby1"
+  ]
+  "survival.galion.studio" = [
+    "survival1"
+  ]
+
+# Advanced settings
+[advanced]
+  # Compression threshold (bytes)
+  # Set to 256 for better performance
+  compression-threshold = 256
+  
+  # Compression level (-1 = default, 0 = none, 1-9 = speed to max)
+  compression-level = -1
+  
+  # Login ratelimit
+  login-ratelimit = 3000
+  
+  # Connection timeout (milliseconds)
+  connection-timeout = 5000
+  
+  # Read timeout (milliseconds)
+  read-timeout = 30000
+  
+  # Proxy protocol
+  proxy-protocol = false
+  
+  # TCP fast open
+  tcp-fast-open = true
+  
+  # BungeeCord plugin channel
+  bungee-plugin-message-channel = true
+  
+  # Show ping requests
+  show-ping-requests = false
+  
+  # Failover on unexpected server disconnect
+  failover-on-unexpected-server-disconnect = true
+  
+  # Announce proxy commands
+  announce-proxy-commands = true
+  
+  # Log command executions
+  log-command-executions = false
+  
+  # Log player connections
+  log-player-connections = true
+
+# Query settings
+[query]
+  # Enable query protocol
+  enabled = true
+  
+  # Query port (same as main port)
+  port = 25577
+  
+  # Show plugins
+  show-plugins = false
+

@@ -1,0 +1,13 @@
+# Galion Studio Minecraft Launcher Requirements
+# This file lists all Python dependencies needed to run the launcher
+
+# Note: tkinter is included with Python by default
+# No additional packages are required for the basic launcher
+
+# Optional: If you want to add NBT support for server configuration
+# nbtlib==2.0.4
+
+# Optional: If you want to add more advanced features later
+# requests==2.31.0  # For downloading Minecraft files
+# pillow==10.1.0    # For custom icons and images
+

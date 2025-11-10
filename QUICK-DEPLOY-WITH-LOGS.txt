@@ -1,0 +1,74 @@
+═══════════════════════════════════════════════════════════
+    ⚡ DEPLOY WITH LIVE LOGS ⚡
+═══════════════════════════════════════════════════════════
+
+🎯 ONE COMMAND - SERVER IN BACKGROUND + LIVE LOGS:
+
+═══════════════════════════════════════════════════════════
+
+apt update && apt install -y docker.io docker-compose && mkdir -p /opt/mc && cd /opt/mc && cat > docker-compose.yml << 'EOF'
+version: '3.9'
+services:
+  minecraft:
+    image: itzg/minecraft-server:java21
+    ports:
+      - "25565:25565"
+    environment:
+      EULA: "TRUE"
+      TYPE: "PAPER"
+      VERSION: "1.21.1"
+      MEMORY: "6G"
+      MAX_PLAYERS: "100"
+      MOTD: "§6⚡ MC.GALION.STUDIO ⚡\n§7No Premium | Join Now!"
+      ONLINE_MODE: "FALSE"
+      VIEW_DISTANCE: "8"
+      DIFFICULTY: "hard"
+      ENABLE_RCON: "true"
+      RCON_PASSWORD: "admin123"
+    volumes:
+      - ./data:/data
+    restart: unless-stopped
+EOF
+docker-compose up -d && echo "" && echo "⚡ SERVER STARTING IN BACKGROUND ⚡" && echo "📊 SHOWING LIVE LOGS (Press Ctrl+C to exit, server stays running)..." && echo "" && sleep 5 && docker-compose logs -f
+
+═══════════════════════════════════════════════════════════
+    📋 HOW IT WORKS:
+═══════════════════════════════════════════════════════════
+
+1. Server starts in BACKGROUND (detached mode)
+2. Terminal shows LIVE LOGS
+3. Press Ctrl+C = Logs close, SERVER KEEPS RUNNING
+4. Reconnect to logs anytime: docker-compose logs -f
+
+═══════════════════════════════════════════════════════════
+    🔧 USEFUL COMMANDS:
+═══════════════════════════════════════════════════════════
+
+# Watch logs again
+cd /opt/mc && docker-compose logs -f
+
+# Check if server is running
+docker-compose ps
+
+# Restart server
+docker-compose restart
+
+# Stop server
+docker-compose down
+
+# Start server + show logs
+docker-compose up -d && docker-compose logs -f
+
+═══════════════════════════════════════════════════════════
+    ✅ BENEFITS:
+═══════════════════════════════════════════════════════════
+
+✓ Server runs in background
+✓ See live logs in terminal
+✓ Close terminal = server keeps running
+✓ SSH disconnect = server keeps running
+✓ Can reconnect to logs anytime
+✓ Server auto-restarts if it crashes
+
+═══════════════════════════════════════════════════════════
+

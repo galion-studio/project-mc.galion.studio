@@ -1,0 +1,92 @@
+# Titan Server - Dockerfile
+# Builds the hybrid Paper + Forge game server
+
+FROM eclipse-temurin:17-jre
+
+# Metadata
+LABEL maintainer="titan@galion.studio"
+LABEL description="Titan Server - Hybrid Minecraft server (plugins + mods)"
+LABEL version="1.0.0-ALPHA"
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    wget \
+    curl \
+    netcat \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create app directory
+WORKDIR /app
+
+# Create necessary directories
+RUN mkdir -p /app/plugins /app/mods /app/config /app/logs /app/world /app/backups
+
+# Download Paper JAR
+# Paper 1.21.1 - latest
+ADD https://api.papermc.io/v2/projects/paper/versions/1.21.1/builds/latest/downloads/paper-1.21.1.jar /app/paper.jar
+
+# Copy Titan server core
+COPY titan-core/build/libs/titan-core-*.jar /app/plugins/
+
+# Copy essential plugins
+COPY plugins/*.jar /app/plugins/
+
+# Copy mods
+COPY mods/*.jar /app/mods/
+
+# Copy configuration files
+COPY config/* /app/config/
+
+# Copy server properties template
+COPY docker/config/server.properties.template /app/server.properties.template
+
+# Copy startup script
+COPY docker/scripts/start-server.sh /app/start-server.sh
+RUN chmod +x /app/start-server.sh
+
+# Expose Minecraft port
+EXPOSE 25565
+
+# Expose metrics port
+EXPOSE 9100
+
+# Health check
+# Check if server is responding to queries
+HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=5 \
+    CMD nc -z localhost 25565 || exit 1
+
+# Environment variables with defaults
+ENV SERVER_TYPE=survival
+ENV SERVER_NAME=titan-server
+ENV MAX_PLAYERS=500
+ENV VIEW_DISTANCE=8
+ENV SIMULATION_DISTANCE=6
+ENV JVM_MEMORY=14G
+
+# JVM options (Aikar's flags - optimized for Minecraft)
+ENV JAVA_OPTS="-Xms${JVM_MEMORY} -Xmx${JVM_MEMORY} \
+    -XX:+UseG1GC \
+    -XX:+ParallelRefProcEnabled \
+    -XX:MaxGCPauseMillis=200 \
+    -XX:+UnlockExperimentalVMOptions \
+    -XX:+DisableExplicitGC \
+    -XX:+AlwaysPreTouch \
+    -XX:G1NewSizePercent=30 \
+    -XX:G1MaxNewSizePercent=40 \
+    -XX:G1HeapRegionSize=8M \
+    -XX:G1ReservePercent=20 \
+    -XX:G1HeapWastePercent=5 \
+    -XX:G1MixedGCCountTarget=4 \
+    -XX:InitiatingHeapOccupancyPercent=15 \
+    -XX:G1MixedGCLiveThresholdPercent=90 \
+    -XX:G1RSetUpdatingPauseTimePercent=5 \
+    -XX:SurvivorRatio=32 \
+    -XX:+PerfDisableSharedMem \
+    -XX:MaxTenuringThreshold=1"
+
+# Volume for persistent data
+VOLUME ["/app/world", "/app/plugins", "/app/logs"]
+
+# Run startup script
+ENTRYPOINT ["/app/start-server.sh"]
+

@@ -1,0 +1,134 @@
+╔═══════════════════════════════════════════════════════════════════╗
+║        GROK CONSOLE CHAT - QUICK START GUIDE                      ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+📚 STEP-BY-STEP SETUP:
+
+1. GET API KEY (REQUIRED):
+   ─────────────────────────
+   • Go to: https://openrouter.ai/keys
+   • Sign up (free $5 credits included!)
+   • Click "Create Key"
+   • Copy your key (starts with: sk-or-v1-...)
+
+2. CONFIGURE:
+   ──────────
+   • Double-click: SETUP-CONSOLE.cmd
+   • OR manually edit .env.grok:
+     Replace: OPENROUTER_API_KEY=your-openrouter-api-key-here
+     With:    OPENROUTER_API_KEY=sk-or-v1-YOUR-ACTUAL-KEY
+
+3. LAUNCH:
+   ────────
+   • Double-click: LAUNCH-CONSOLE.cmd
+   • You'll see a colorful console interface!
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                         COMMANDS REFERENCE                         ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+🤖 AI COMMANDS:
+   @ai <question>              Ask Grok AI anything
+   @ai What is redstone?       Example: Get info about Minecraft
+   @ai How to make a plugin?   Example: Coding help
+   
+   Note: Just type any text without commands = defaults to AI!
+
+🎮 MINECRAFT COMMANDS:
+   /say <message>              Broadcast to Minecraft chat
+   /list                       Show online players
+   /time set day               Change time
+   /gamemode creative <player> Change player's gamemode
+   /whitelist add <player>     Add player to whitelist
+   /cmd <any-command>          Execute any Minecraft command
+
+💻 PROJECT COMMANDS:
+   @project status             Git status
+   @project log                Recent commits  
+   @project diff               Show changes
+   @project docker             List containers
+   @project logs               View server logs
+   @project build              Build the project
+   @project ls                 List files
+
+⚙️ SYSTEM COMMANDS:
+   /status                     Show system stats & performance
+   /help                       Show help message
+   /quit or /exit              Close console
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                            EXAMPLES                                ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Example 1: Ask AI
+─────────────────
+> @ai What is redstone good for?
+🤔 Asking Grok...
+⚡ Grok responded in 0.543s
+🤖 Grok: Redstone is Minecraft's electrical system for circuits,
+automation, doors, traps, and contraptions...
+
+Example 2: Minecraft Command
+────────────────────────────
+> /say Server restarting in 5 minutes!
+⚙️  Executing: say Server restarting in 5 minutes!
+✓ Command executed in 0.042s
+
+Example 3: Project Status
+─────────────────────────
+> @project status
+M console-chat.py
+M README.md
+?? new-feature.py
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                         PERFORMANCE                                ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Expected Response Times:
+• AI Responses:  0.3 - 0.8 seconds
+• Cache Hits:    < 0.01 seconds (instant!)
+• RCON Commands: 30 - 50 ms
+• Project Ops:   Varies by operation
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                      TROUBLESHOOTING                               ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+Problem: "Commands don't work"
+Solution: Make sure you started with LAUNCH-CONSOLE.cmd
+          Check that all modules imported (run test_imports_fixed.py)
+
+Problem: "AI not responding"
+Solution: 1. Check .env.grok has your API key
+          2. Verify key is correct (starts with sk-or-v1-)
+          3. Check you have credits: https://openrouter.ai/credits
+
+Problem: "RCON not connected"
+Solution: 1. Make sure Minecraft server is running
+          2. Check docker ps shows titan-hub container
+          3. Verify RCON password in .env.grok
+
+Problem: "Module not found"
+Solution: Run: py -m pip install -r requirements-grok.txt
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                           SUPPORT                                  ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+• Check GROK-CONSOLE-README.md for full documentation
+• Test imports: py test_imports_fixed.py
+• View logs: Check console output
+• OpenRouter status: https://openrouter.ai/status
+• Get API key: https://openrouter.ai/keys
+
+╔═══════════════════════════════════════════════════════════════════╗
+║                    READY TO START!                                 ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+1. Run: SETUP-CONSOLE.cmd (one time only)
+2. Then: LAUNCH-CONSOLE.cmd (every time you want to use it)
+3. Type: @ai Hello! (to test)
+
+Enjoy your ultra-fast AI-powered console! ⚡
+

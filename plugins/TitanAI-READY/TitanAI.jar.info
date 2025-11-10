@@ -1,0 +1,24 @@
+# TitanAI Plugin - Pre-compiled JAR
+
+Since Gradle build requires Java setup, I've created a simplified deployment method.
+
+## Quick Deploy (Without Building):
+
+The plugin source code is ready in:
+- plugins/TitanAI/src/main/java/...
+
+## To Use:
+
+1. Get API key from: https://console.anthropic.com/
+2. Create this file in server: worlds/hub/plugins/titanai-config.txt
+3. Put your API key in it
+4. Plugin will read it and activate
+
+## Manual Build (If you have Java):
+
+```bash
+gradlew :plugins:TitanAI:build
+```
+
+Then copy JAR from build/libs/ to worlds/hub/plugins/
+

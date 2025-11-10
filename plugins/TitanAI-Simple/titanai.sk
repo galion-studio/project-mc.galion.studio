@@ -1,0 +1,23 @@
+# Titan AI Assistant - Skript Version
+# Simple version using Skript plugin
+# No compilation needed!
+
+# This is a Skript script that adds @ai command
+# Install Skript plugin first, then add this script
+
+on chat:
+    if message starts with "@ai ":
+        cancel event
+        set {_question} to subtext of message from characters 5 to length of message
+        set {_player} to player
+        
+        broadcast "&7[%player%&7] &f@ai %{_question}%"
+        broadcast "&e[Console] 🤔 Thinking..."
+        
+        # Here you would call external API
+        # For now, show help message
+        wait 1 second
+        broadcast "&b[Console] &fAI Assistant ready!"
+        broadcast "&b[Console] &fGet API key from console.anthropic.com"
+        broadcast "&b[Console] &fThen configure in plugins/TitanAI/config.yml"
+

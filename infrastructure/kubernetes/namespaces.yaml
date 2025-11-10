@@ -1,0 +1,51 @@
+# Galion Kubernetes Namespaces
+# Logical separation of components
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: galion-proxy
+  labels:
+    name: galion-proxy
+    component: proxy
+    app.kubernetes.io/name: galion
+    app.kubernetes.io/component: proxy
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: galion-servers
+  labels:
+    name: galion-servers
+    component: servers
+    app.kubernetes.io/name: galion
+    app.kubernetes.io/component: servers
+    # Pod security
+    pod-security.kubernetes.io/enforce: baseline
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: galion-data
+  labels:
+    name: galion-data
+    component: data
+    app.kubernetes.io/name: galion
+    app.kubernetes.io/component: data
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: galion-monitoring
+  labels:
+    name: galion-monitoring
+    component: monitoring
+    app.kubernetes.io/name: galion
+    app.kubernetes.io/component: monitoring
+

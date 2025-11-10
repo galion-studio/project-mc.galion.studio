@@ -1,0 +1,18 @@
+# Titan AI Bridge - Python Dependencies
+# Ultra-fast AI chat for Minecraft
+
+# Async HTTP client (fast API calls)
+aiohttp==3.9.1
+
+# RCON client (Minecraft server communication)
+mcrcon==0.7.0
+
+# Alternative: OpenAI SDK (works with OpenRouter)
+openai==1.3.0
+
+# Caching (optional, for even faster responses)
+redis==5.0.1
+
+# Utilities
+python-dotenv==1.0.0
+

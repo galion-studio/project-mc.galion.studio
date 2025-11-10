@@ -1,0 +1,120 @@
+# Titan Server - Optimized Paper Configuration
+# Tuned for 400-500 players per server
+# Based on first principles and performance testing
+
+# Async chunks loading (CRITICAL for performance)
+settings:
+  async-chunks:
+    threads: 8  # Increase for more CPU cores
+
+# Chunk loading optimization
+world-settings:
+  default:
+    # Chunk management
+    max-auto-save-chunks-per-tick: 8
+    prevent-moving-into-unloaded-chunks: true
+    delay-chunk-unloads-by: 10s
+    
+    # Entity optimizations
+    entities:
+      armor-stands:
+        do-collision-entity-lookups: false
+        tick: false  # Armor stands don't need ticking
+      
+      spawning:
+        per-player-mob-spawns: true  # More fair mob distribution
+        alt-item-despawn-rate:
+          enabled: true
+          items:
+            cobblestone: 300  # 15 seconds
+            netherrack: 300
+            sand: 300
+            red_sand: 300
+            gravel: 300
+            dirt: 300
+            grass: 300
+            pumpkin: 300
+            melon_slice: 300
+            kelp: 300
+            bamboo: 300
+            sugar_cane: 300
+            twisting_vines: 300
+            weeping_vines: 300
+            oak_leaves: 300
+            spruce_leaves: 300
+            birch_leaves: 300
+            jungle_leaves: 300
+            acacia_leaves: 300
+            dark_oak_leaves: 300
+            cactus: 300
+      
+      # Entity limits (prevent lag from too many entities)
+      spawning-limits:
+        monster: 70
+        creature: 10
+        ambient: 15
+        axolotls: 5
+        underground_water_creature: 5
+        water_creature: 5
+        water_ambient: 20
+    
+    # Hopper optimizations
+    hopper:
+      cooldown-when-full: true
+      disable-move-event: false
+    
+    # Redstone optimizations
+    optimize-explosions: true
+    
+    # Misc optimizations
+    treasure-maps-enabled: false  # Reduces chunk loading
+    fix-climbing-bypassing-cramming-rule: true
+    
+    # Lighting engine
+    light-queue-size: 20
+    
+    # Anti-cheat optimizations
+    anti-xray:
+      enabled: false  # Enable in production with proper config
+      engine-mode: 1
+      max-block-height: 64
+    
+    # View distance (per-world override)
+    # Set lower for worlds with many players
+    view-distance: default  # Use server.properties value
+
+# Timings configuration
+timings:
+  enabled: true
+  verbose: false
+  server-name-privacy: false
+  hidden-config-entries:
+    - database
+    - settings.bungeecord-addresses
+    - settings.velocity-support.secret
+  
+# Console settings
+console:
+  enable-brigadier-highlighting: true
+  enable-brigadier-completions: true
+
+# Messages
+messages:
+  kick:
+    authentication-servers-down: "Authentication servers are down. Please try again later."
+    connection-throttle: "Connection throttled! Please wait before reconnecting."
+    flying-player: "Flying is not enabled on this server."
+    flying-vehicle: "Flying is not enabled on this server."
+  
+  no-permission: "&cI'm sorry, but you do not have permission to perform this command."
+
+# Packet limiter (DDoS protection)
+packet-limiter:
+  all-packets:
+    interval: 7.0
+    max-packet-rate: 500.0
+  overrides:
+    ServerboundPlaceRecipePacket:
+      interval: 4.0
+      max-packet-rate: 5.0
+

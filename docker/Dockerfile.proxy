@@ -1,0 +1,48 @@
+# Titan Proxy - Dockerfile
+# Builds the Velocity-based proxy server
+
+FROM eclipse-temurin:17-jre-alpine
+
+# Metadata
+LABEL maintainer="titan@galion.studio"
+LABEL description="Titan Proxy - High-performance Minecraft proxy"
+LABEL version="1.0.0-ALPHA"
+
+# Create app directory
+WORKDIR /app
+
+# Create data directories
+RUN mkdir -p /app/plugins /app/config /app/logs
+
+# Copy Velocity JAR
+# Note: Download Velocity JAR during build process
+ADD https://api.papermc.io/v2/projects/velocity/versions/3.3.0-SNAPSHOT/builds/latest/downloads/velocity-3.3.0-SNAPSHOT.jar /app/velocity.jar
+
+# Copy Titan proxy plugin
+COPY titan-proxy/build/libs/titan-proxy-*.jar /app/plugins/
+
+# Copy configuration
+COPY titan-proxy/config/* /app/config/
+
+# Expose ports
+# 25577 - Minecraft connection port
+# 8080 - Web dashboard/API
+EXPOSE 25577 8080
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 \
+    CMD nc -z localhost 25577 || exit 1
+
+# JVM options for proxy
+# Proxies don't need much RAM (2-4GB is enough)
+ENV JAVA_OPTS="-Xms2G -Xmx4G \
+    -XX:+UseG1GC \
+    -XX:G1HeapRegionSize=4M \
+    -XX:+UnlockExperimentalVMOptions \
+    -XX:+ParallelRefProcEnabled \
+    -XX:+AlwaysPreTouch \
+    -XX:MaxInlineLevel=15"
+
+# Run Velocity
+CMD java $JAVA_OPTS -jar velocity.jar
+

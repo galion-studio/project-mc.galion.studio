@@ -1,0 +1,50 @@
+═══════════════════════════════════════════════════════════
+    🐛 BUG REPORT SYSTEM - QUICK GUIDE
+═══════════════════════════════════════════════════════════
+
+✅ WORKS IMMEDIATELY - NO COMPILATION NEEDED!
+
+═══════════════════════════════════════════════════════════
+    🎮 HOW TO USE:
+═══════════════════════════════════════════════════════════
+
+IN MINECRAFT CHAT, TYPE:
+
+   BUG: Server is lagging
+   BUG: Can't teleport to spawn
+   BUG: AI responses not working
+   BUG: Need more RAM allocated
+
+═══════════════════════════════════════════════════════════
+    📝 WHAT HAPPENS:
+═══════════════════════════════════════════════════════════
+
+1. You type: BUG: description
+2. System detects it instantly
+3. Saves to: bug-reports.txt with timestamp
+4. Confirms: "✓ Bug report saved!"
+5. Notifies all admins
+
+═══════════════════════════════════════════════════════════
+    🚀 TO START:
+═══════════════════════════════════════════════════════════
+
+Double-click: START-BUG-LOGGER.cmd
+
+Or manually:
+   powershell -File BUG-LOGGER.ps1
+
+═══════════════════════════════════════════════════════════
+    📊 SAVED FORMAT:
+═══════════════════════════════════════════════════════════
+
+[2025-11-09 23:05:42] Reporter: galion.studio
+Description: Server is lagging
+----------------------------------------
+
+All bugs saved to: bug-reports.txt
+
+═══════════════════════════════════════════════════════════
+
+🐛 TYPE 'BUG: test' IN MINECRAFT TO TRY IT! 🐛
+

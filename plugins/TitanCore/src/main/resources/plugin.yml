@@ -1,0 +1,58 @@
+# Titan Core Plugin Configuration
+
+name: TitanCore
+version: 1.0.0
+main: studio.galion.titan.plugins.core.TitanCorePlugin
+api-version: '1.21'
+author: Titan Team
+description: Core functionality for Titan server platform
+website: https://mc.galion.studio
+
+commands:
+  titan:
+    description: Show Titan server information
+    usage: /titan
+    permission: titan.info
+  
+  players:
+    description: List online players with session info
+    usage: /players
+    aliases: [list, who, online]
+    permission: titan.players
+  
+  tps:
+    description: Show server TPS (performance)
+    usage: /tps
+    permission: titan.tps
+  
+  server:
+    description: Server selection menu
+    usage: /server [name]
+    permission: titan.server
+
+permissions:
+  titan.info:
+    description: View server info
+    default: true
+  
+  titan.players:
+    description: List online players
+    default: true
+  
+  titan.tps:
+    description: Check server TPS
+    default: true
+  
+  titan.server:
+    description: Switch between servers
+    default: true
+  
+  titan.admin:
+    description: Admin access to all features
+    default: op
+    children:
+      titan.info: true
+      titan.players: true
+      titan.tps: true
+      titan.server: true
+

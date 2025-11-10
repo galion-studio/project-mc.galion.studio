@@ -1,0 +1,54 @@
+# Titan Server - server.properties template
+# Environment variables will be substituted at runtime
+
+# Server basics
+server-name=${SERVER_NAME}
+server-port=25565
+online-mode=false
+white-list=false
+
+# Player limits
+max-players=${MAX_PLAYERS}
+
+# World settings
+level-name=world
+level-type=minecraft:normal
+difficulty=hard
+hardcore=false
+allow-nether=true
+allow-end=true
+spawn-protection=0
+
+# Performance settings
+view-distance=${VIEW_DISTANCE}
+simulation-distance=${SIMULATION_DISTANCE}
+max-tick-time=60000
+spawn-monsters=true
+spawn-animals=true
+spawn-npcs=true
+
+# Network optimization
+network-compression-threshold=256
+max-world-size=29999984
+
+# Chunk settings
+max-chained-neighbor-updates=1000000
+
+# Entity limits
+spawn-limits.monster=50
+spawn-limits.creature=15
+spawn-limits.ambient=15
+spawn-limits.water-creature=7
+spawn-limits.water-ambient=10
+
+# Gameplay
+pvp=true
+enable-command-block=true
+enable-query=true
+enable-rcon=false
+enable-status=true
+
+# Server messages
+motd=§6§lTitan Server §8§l| §7${SERVER_TYPE}\n§7Powered by Titan Framework
+server-ip=
+

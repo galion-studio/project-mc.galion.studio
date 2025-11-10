@@ -1,0 +1,61 @@
+# Titan Server - Optimized Bukkit Configuration
+# Performance tuned for high player counts
+
+settings:
+  # Allow creative players to break bedrock
+  allow-end: true
+  
+  # Warn on plugin overload
+  warn-on-overload: true
+  
+  # Set permissions file
+  permissions-file: permissions.yml
+  
+  # Update folder for plugins
+  update-folder: update
+  
+  # Plugin profiling
+  plugin-profiling: false
+  
+  # Connection throttle
+  connection-throttle: 4000
+  
+  # Query plugins
+  query-plugins: true
+  
+  # Deprecated verbose
+  deprecated-verbose: default
+  
+  # Shutdown message
+  shutdown-message: Server closed
+  
+  # Minimum API version
+  minimum-api: none
+
+spawn-limits:
+  # Aggressive spawn limit reduction for performance
+  monsters: 50
+  animals: 15
+  water-animals: 7
+  water-ambient: 10
+  water-underground-creature: 5
+  axolotls: 5
+  ambient: 15
+
+chunk-gc:
+  # Chunk garbage collection
+  period-in-ticks: 600
+  load-threshold: 300
+
+ticks-per:
+  # Tick optimization
+  animal-spawns: 400
+  monster-spawns: 5
+  water-spawns: 11
+  water-ambient-spawns: 21
+  water-underground-creature-spawns: 11
+  axolotl-spawns: 11
+  ambient-spawns: 31
+  autosave: 6000
+
+aliases: now-in-commands.yml

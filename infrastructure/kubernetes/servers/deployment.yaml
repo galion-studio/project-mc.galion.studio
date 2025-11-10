@@ -1,0 +1,202 @@
+# Minecraft Server Deployment for Galion
+# Hybrid server supporting both mods and plugins
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mc-server
+  namespace: galion-servers
+  labels:
+    app: mc-server
+    component: gameserver
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: mc-server
+  template:
+    metadata:
+      labels:
+        app: mc-server
+        component: gameserver
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9225"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+      - name: minecraft
+        image: registry.galion.studio/hybrid-server:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 25565
+          name: minecraft
+          protocol: TCP
+        - containerPort: 9225
+          name: metrics
+          protocol: TCP
+        env:
+        - name: MC_EULA
+          value: "true"
+        - name: MC_MAX_MEMORY
+          value: "8G"
+        - name: MC_INIT_MEMORY
+          value: "8G"
+        - name: POSTGRES_HOST
+          value: "postgresql.galion-data.svc.cluster.local"
+        - name: POSTGRES_PORT
+          value: "5432"
+        - name: POSTGRES_DB
+          value: "galion_mc"
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: password
+        - name: REDIS_HOST
+          value: "redis.galion-data.svc.cluster.local"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redis-credentials
+              key: password
+        - name: VELOCITY_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: velocity-secret
+              key: secret
+        volumeMounts:
+        - name: server-data
+          mountPath: /server/world
+        - name: config
+          mountPath: /server/config
+        resources:
+          requests:
+            memory: "8Gi"
+            cpu: "2000m"
+          limits:
+            memory: "10Gi"
+            cpu: "4000m"
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - "pgrep -f 'java.*server.jar' > /dev/null"
+          initialDelaySeconds: 120
+          periodSeconds: 30
+          failureThreshold: 3
+        readinessProbe:
+          tcpSocket:
+            port: 25565
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          failureThreshold: 3
+      volumes:
+      - name: server-data
+        persistentVolumeClaim:
+          claimName: server-data
+      - name: config
+        configMap:
+          name: server-config
+      imagePullSecrets:
+      - name: regcred
+      affinity:
+        # Spread pods across nodes for redundancy
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - mc-server
+              topologyKey: kubernetes.io/hostname
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mc-server
+  namespace: galion-servers
+  labels:
+    app: mc-server
+spec:
+  type: ClusterIP
+  ports:
+  - port: 25565
+    targetPort: 25565
+    protocol: TCP
+    name: minecraft
+  - port: 9225
+    targetPort: 9225
+    protocol: TCP
+    name: metrics
+  selector:
+    app: mc-server
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: mc-server-hpa
+  namespace: galion-servers
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: mc-server
+  minReplicas: 10
+  maxReplicas: 200
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Percent
+        value: 50
+        periodSeconds: 60
+      - type: Pods
+        value: 10
+        periodSeconds: 60
+      selectPolicy: Max
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Pods
+        value: 5
+        periodSeconds: 60
+      selectPolicy: Min
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: server-data
+  namespace: galion-servers
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 500Gi
+  storageClassName: fast-ssd
+

@@ -1,0 +1,21 @@
+# Example Plugin - Plugin Configuration
+
+name: ExamplePlugin
+version: ${version}
+main: studio.galion.titan.examples.ExamplePlugin
+api-version: '1.21'
+author: Titan Team
+description: Example plugin for Titan platform
+website: https://github.com/yourusername/project-mc-serv-mc.galion.studio
+
+commands:
+  example:
+    description: Example command
+    usage: /example
+    permission: example.use
+    permission-message: You don't have permission to use this command
+
+permissions:
+  example.use:
+    description: Allows use of /example command
+    default: true

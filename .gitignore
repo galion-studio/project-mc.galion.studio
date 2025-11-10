@@ -1,0 +1,173 @@
+# Titan Project - Comprehensive .gitignore
+
+# ===================
+# Java / Gradle
+# ===================
+*.class
+*.log
+*.ctxt
+.mtj.tmp/
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
+
+# Gradle
+.gradle/
+build/
+!gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# ===================
+# IDEs
+# ===================
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# ===================
+# Minecraft Server Files
+# ===================
+
+# World data (too large for git)
+worlds/*/
+!worlds/.gitkeep
+!worlds/README.md
+
+# Server files
+*.log
+logs/
+crash-reports/
+server.properties
+ops.json
+whitelist.json
+banned-players.json
+banned-ips.json
+usercache.json
+eula.txt
+
+# Cache and temporary files
+cache/
+tmp/
+temp/
+
+# ===================
+# Docker
+# ===================
+*.dockerignore
+
+# ===================
+# Environment & Secrets
+# ===================
+.env
+.env.local
+.env.production
+*.pem
+*.key
+*.crt
+secrets/
+credentials.json
+
+# ===================
+# Database
+# ===================
+*.db
+*.sqlite
+*.sqlite3
+postgres-data/
+mysql-data/
+
+# ===================
+# Backups
+# ===================
+backups/
+*.backup
+*.bak
+
+# ===================
+# Monitoring & Logs
+# ===================
+prometheus-data/
+grafana-data/
+elasticsearch-data/
+logs/
+*.log
+
+# ===================
+# Build Artifacts
+# ===================
+dist/
+target/
+*.jar
+!gradle-wrapper.jar
+!libs/*.jar
+
+# ===================
+# OS Specific
+# ===================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.nfs*
+
+# ===================
+# Testing
+# ===================
+coverage/
+.pytest_cache/
+.coverage
+htmlcov/
+test-results/
+
+# ===================
+# Terraform (if used for infrastructure)
+# ===================
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+
+# ===================
+# Keep Important Directories
+# ===================
+!.gitkeep

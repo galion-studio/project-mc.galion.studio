@@ -1,0 +1,50 @@
+# Titan Server Configuration
+# This configuration is loaded on startup
+# Can be overridden by environment variables or system properties
+
+# Server identification
+server:
+  name: "titan-server-1"
+  type: "survival"  # hub, survival, creative, minigame, etc.
+  max-players: 500
+
+# Network configuration
+network:
+  bind-address: "0.0.0.0"
+  bind-port: 25565
+
+# Database configuration (PostgreSQL)
+database:
+  host: "localhost"
+  port: 5432
+  database: "titan"
+  username: "titan"
+  password: "changeme"
+  pool-size: 10
+
+# Redis configuration
+redis:
+  host: "localhost"
+  port: 6379
+  password: ""  # Leave empty if no password
+  database: 0
+
+# Performance settings
+performance:
+  view-distance: 8
+  simulation-distance: 6
+  async-chunks: true
+  max-tick-time: 60000
+
+# Features
+features:
+  cross-server-chat: true
+  player-sync: true
+  economy-sync: true
+  
+# Logging
+logging:
+  chat-messages: true
+  player-events: true
+  server-events: true
+

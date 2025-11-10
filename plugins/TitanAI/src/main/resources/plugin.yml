@@ -1,0 +1,15 @@
+# Titan AI Assistant Plugin
+
+name: TitanAI
+version: ${version}
+main: studio.galion.titan.plugins.ai.TitanAIPlugin
+api-version: '1.21'
+author: Titan Team
+description: In-game AI assistant powered by Claude Sonnet 4.5
+website: https://mc.galion.studio
+
+# Soft dependencies (load after these if present)
+softdepend: [TitanCore]
+
+# No commands needed - works through chat with @ai prefix
+

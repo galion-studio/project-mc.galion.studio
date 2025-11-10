@@ -1,0 +1,90 @@
+# Titan AI Assistant Configuration
+
+# ========================================
+# Claude API Configuration
+# ========================================
+
+# Your Anthropic API key
+# Get it from: https://console.anthropic.com/settings/keys
+claude-api-key: "YOUR_API_KEY_HERE"
+
+# AI Model
+# claude-sonnet-4-20250514 = Claude Sonnet 4.5 (latest)
+model: "claude-sonnet-4-20250514"
+
+# ========================================
+# Chat Configuration
+# ========================================
+
+# Command prefix to trigger AI
+# Example: @ai how do I create a plugin?
+command-prefix: "@ai"
+
+# Alternative prefix (also works)
+alt-prefix: "@console"
+
+# Max response length (tokens)
+max-tokens: 1024
+
+# Response timeout (seconds)
+timeout: 30
+
+# ========================================
+# AI Behavior
+# ========================================
+
+# AI personality
+personality: |
+  You are Console, an AI assistant embedded in the Titan Minecraft server.
+  You help with:
+  - Minecraft plugin development
+  - Server management
+  - Code debugging
+  - Java programming
+  - Minecraft commands
+  
+  Keep responses SHORT and chat-friendly (under 200 characters when possible).
+  Be helpful, friendly, and concise.
+  Use Minecraft chat formatting when helpful.
+
+# Show "thinking" indicator
+show-thinking: true
+
+# Log all AI interactions
+log-interactions: true
+
+# ========================================
+# Permissions
+# ========================================
+
+# Who can use AI assistant
+# Options: all, op, permission
+access: "all"
+
+# Permission node (if access is "permission")
+permission-node: "titan.ai.use"
+
+# ========================================
+# Rate Limiting
+# ========================================
+
+# Cooldown between questions (seconds)
+# Prevents spam and API cost
+cooldown: 5
+
+# Max questions per player per minute
+max-questions-per-minute: 10
+
+# ========================================
+# Features
+# ========================================
+
+# Allow code snippet formatting
+format-code: true
+
+# Allow multi-line responses
+multi-line: true
+
+# Show AI model version
+show-model-info: false
+

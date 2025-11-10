@@ -1,0 +1,69 @@
+═══════════════════════════════════════════════════════════
+    ⚡ TITAN SERVER - EXECUTE NOW ⚡
+═══════════════════════════════════════════════════════════
+
+🎯 YOUR VPS:
+   IP: 54.37.223.40
+   User: root
+   Pass: Phdhxdp10b@(05)A
+
+═══════════════════════════════════════════════════════════
+    📋 COPY-PASTE THIS (ONE COMMAND):
+═══════════════════════════════════════════════════════════
+
+apt update && apt install -y docker.io docker-compose && mkdir -p /opt/mc && cd /opt/mc && cat > docker-compose.yml << 'EOF'
+version: '3.9'
+services:
+  minecraft:
+    image: itzg/minecraft-server:java21
+    ports:
+      - "25565:25565"
+    environment:
+      EULA: "TRUE"
+      TYPE: "PAPER"
+      VERSION: "1.21.1"
+      MEMORY: "6G"
+      MAX_PLAYERS: "100"
+      MOTD: "§6⚡ MC.GALION.STUDIO ⚡\n§7Join Now | No Premium"
+      ONLINE_MODE: "FALSE"
+      VIEW_DISTANCE: "8"
+      ENABLE_RCON: "true"
+      RCON_PASSWORD: "admin123"
+    volumes:
+      - ./data:/data
+    restart: unless-stopped
+EOF
+docker-compose up -d && echo "⚡ STARTING - WAIT 60 SECONDS ⚡" && sleep 60 && docker-compose logs --tail=20
+
+═══════════════════════════════════════════════════════════
+    ✅ AFTER DEPLOYMENT:
+═══════════════════════════════════════════════════════════
+
+🎮 CONNECT:
+   mc.galion.studio:25565
+   or
+   54.37.223.40:25565
+
+📊 CHECK STATUS:
+   cd /opt/mc
+   docker-compose ps
+
+📝 VIEW LOGS:
+   docker-compose logs -f
+
+🔧 ADMIN:
+   docker-compose exec minecraft rcon-cli
+
+═══════════════════════════════════════════════════════════
+    🚀 3 STEPS TO DEPLOY:
+═══════════════════════════════════════════════════════════
+
+1. SSH to VPS: ssh root@54.37.223.40
+2. Paste the ONE COMMAND above
+3. Wait 3 minutes
+4. Connect and play!
+
+═══════════════════════════════════════════════════════════
+
+⚡ SHIP IT NOW! ⚡
+
