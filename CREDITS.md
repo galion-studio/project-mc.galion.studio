@@ -148,7 +148,10 @@ If you'd like to contribute:
 
 ## 📜 Copyright & License
 
-**Copyright © 2025 galion.studio - Maciej Grajczyk**
+G.A.L.I.O.N. — General Autonomous Local Intelligence Open Network  
+Developed and distributed by Galion Labs  
+Perpetual Open MIT License  
+**Copyright © 2026 Galion Labs. All rights reserved.**
 
 This project is licensed under the MIT License.
 
