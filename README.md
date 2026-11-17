@@ -613,7 +613,10 @@ Built using **Elon Musk's First Principles**:
 
 **Made with ❤️ by [galion.studio](https://galion.studio)**
 
-**Copyright © 2025 galion.studio - Maciej Grajczyk**
+G.A.L.I.O.N. — General Autonomous Local Intelligence Open Network  
+Developed and distributed by Galion Labs  
+Perpetual Open MIT License  
+**Copyright © 2026 Galion Labs. All rights reserved.**
 
 *Built for speed. Designed for simplicity. Ready to play.*
 

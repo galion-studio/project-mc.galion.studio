@@ -451,7 +451,10 @@ THEME = {
 ## License
 
 Part of GALION Gaming Platform  
-© 2025 galion.studio
+G.A.L.I.O.N. — General Autonomous Local Intelligence Open Network  
+Developed and distributed by Galion Labs  
+Perpetual Open MIT License  
+Copyright © 2026 Galion Labs. All rights reserved.
 
 ---
 

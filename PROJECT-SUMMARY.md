@@ -458,7 +458,10 @@ GET /docs (Swagger UI)
 
 *"Done is better than perfect. Ship it!"* - Elon Musk
 
-**Copyright © 2025 galion.studio - Maciej Grajczyk**
+G.A.L.I.O.N. — General Autonomous Local Intelligence Open Network  
+Developed and distributed by Galion Labs  
+Perpetual Open MIT License  
+**Copyright © 2026 Galion Labs. All rights reserved.**
 
 🚀 **SHIPPED!**
 
